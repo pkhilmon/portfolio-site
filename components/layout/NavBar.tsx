@@ -18,7 +18,9 @@ export function NavBar() {
     const closeDrawer = useCallback(() => {
         setDrawerOpen(false);
         // return focus on hamburger on close
-        hamburgerRef.current?.focus();
+        if (window.innerWidth < 768) {
+            hamburgerRef.current?.focus();
+        }
     }, []) // stable - setDrawerOpen and refs dont change
 
     // active secrtion
@@ -71,16 +73,16 @@ export function NavBar() {
         // focus the drawer itself on open
         drawer.focus()
 
-        const focusable = drawer.querySelectorAll<HTMLElement>(
-            'a, button, [tabindex]:not([tabindex="-1"])'
-        )
-        const first = focusable[0]
-        const last = focusable[focusable.length - 1]
-
-        if (!first) return // nothing focusable - bail out entirely
-
         const handleTab = (e: KeyboardEvent) => {
             if (e.key !== "Tab") return
+
+            const focusable = drawer.querySelectorAll<HTMLElement>(
+                'a, button, [tabindex]:not([tabindex="-1"])'
+            )
+            const first = focusable[0]
+            const last = focusable[focusable.length - 1]
+
+            if (!first) return // nothing focusable - bail out entirely
             if (focusable.length === 1) {
                 // single element = keep focus pinned
                 e.preventDefault()
@@ -113,16 +115,16 @@ export function NavBar() {
         return () => { document.body.style.overflow = "" }
     }, [drawerOpen])
 
-    useEffect(() => { drawerOpenRef.current == drawerOpen; }, [drawerOpen])
+    useEffect(() => { drawerOpenRef.current = drawerOpen; }, [drawerOpen])
 
     // close drawer on viewport resize past the md breakpoint
-    useEffect((() => {
+    useEffect(() => {
         const handleResize = () => {
-            if (window.innerWidth >= 768 && drawerOpen) closeDrawer();
+            if (window.innerWidth >= 768 && drawerOpenRef.current) closeDrawer();
         }
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);
-    }), [closeDrawer])
+    }, [closeDrawer])
 
     return (
         <div>
@@ -198,6 +200,7 @@ export function NavBar() {
                 aria-modal="true"
                 aria-label="Navigation menu"
                 tabIndex={-1}
+                aria-hidden={!drawerOpen}
                 className={cn("fixed top-0 right-0 z-50 h-full w-72 bg-background border-l border-border",
                     "flex flex-col pt-20 pb-8 px-6 gap-2",
                     "transition-transform duration-300 ease-in-out md:hidden",
@@ -227,7 +230,7 @@ export function NavBar() {
                                             "rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent",
                                             activeId === id
                                                 ? "text-accent font-medium bg-accent/10"
-                                                : "text-muted-foreground hover:text-background hover:bg-secondary"
+                                                : "text-muted-foreground hover:text-foreground hover:bg-secondary"
                                         )}
                                     >
                                         {id}

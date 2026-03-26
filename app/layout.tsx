@@ -1,5 +1,5 @@
 import "@/lib/env";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   description: "Frontend developer specialising in React and Next.js with a background spanning game dev, Java, embedded systems and Python.",
 };
 
-export const viewport = {
+export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
 }
@@ -25,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" data-theme="clean" className={cn(inter.variable)}>
-      <body className={cn("antialiased")}>
+      <body className={cn("font-inter", "antialiased")}>
         <a href="#main-content" className="sr-only focus:not-sr-only">Skip to content</a>
         <NavBar />
           {children}

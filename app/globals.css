@@ -63,6 +63,7 @@
   --muted-foreground: oklch(0.556 0 0);
   --accent: #2563eb;
   --accent-foreground: #ffffff;
+  --color-accent-hover: #1d4ed8;
   --destructive: oklch(0.577 0.245 27.325);
   --border: #e2e8f0;
   --input: oklch(0.922 0 0);
