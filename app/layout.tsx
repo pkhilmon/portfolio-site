@@ -1,26 +1,22 @@
+import "@/lib/env";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Inter } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import { NavBar } from "@/components/NavBar";
-import { Footer } from "@/components/Footer";
+import { NavBar } from "@/components/layout/NavBar";
+import { Footer } from "@/components/layout/Footer";
 
 const inter = Inter({subsets:['latin'],variable:'--font-inter'});
 
-// const geistSans = Geist({
-//   variable: "--font-geist-sans",
-//   subsets: ["latin"],
-// });
-
-// const geistMono = Geist_Mono({
-//   variable: "--font-geist-mono",
-//   subsets: ["latin"],
-// });
-
 export const metadata: Metadata = {
-  title: "Create Landing Page",
-  description: "Created by Pavlo",
+  title: "Pavlo Khilmon - Software Developer",
+  description: "Frontend developer specialising in React and Next.js with a background spanning game dev, Java, embedded systems and Python.",
 };
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+}
 
 export default function RootLayout({
   children,
@@ -28,11 +24,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-theme="clean" className={cn("font-inter", inter.variable)}>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <body
-        className={`${inter.variable} antialiased`}
-      >
+    <html lang="en" data-theme="clean" className={cn(inter.variable)}>
+      <body className={cn("antialiased")}>
         <a href="#main-content" className="sr-only focus:not-sr-only">Skip to content</a>
         <NavBar />
           {children}

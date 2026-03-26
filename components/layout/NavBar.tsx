@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { useEffect, useState, useRef } from "react"
-import { SECTION_IDS, SOCIAL_LINKS, HEADER_TITLE } from "@/lib/constants"
+import { useEffect, useState, useRef, useCallback } from "react"
+import { SECTION_IDS, NAV_LINKS, SOCIAL_LINKS, HEADER_TITLE } from "@/lib/constants"
 
 
 export function NavBar() {
@@ -13,6 +13,13 @@ export function NavBar() {
 
     const drawerRef = useRef<HTMLDivElement>(null)
     const hamburgerRef = useRef<HTMLButtonElement>(null)
+    const drawerOpenRef = useRef<boolean>(drawerOpen);
+
+    const closeDrawer = useCallback(() => {
+        setDrawerOpen(false);
+        // return focus on hamburger on close
+        hamburgerRef.current?.focus();
+    }, []) // stable - setDrawerOpen and refs dont change
 
     // active secrtion
     useEffect(() => {
@@ -48,11 +55,11 @@ export function NavBar() {
     // close drawer on Escape
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
-            if (e.key == "Escape") closeDrawer()
+            if (e.key === "Escape" && drawerOpen) closeDrawer()
         }
         document.addEventListener("keydown", handleKeyDown);
         return () => document.removeEventListener("keydown", handleKeyDown);
-    }, [])
+    }, [closeDrawer, drawerOpen]) // safe dep - closeDrawer is now stable
 
     // focus trap
     useEffect(() => {
@@ -65,13 +72,21 @@ export function NavBar() {
         drawer.focus()
 
         const focusable = drawer.querySelectorAll<HTMLElement>(
-            'a, button, [tabindex]:not([tabIndex="-1"])'
+            'a, button, [tabindex]:not([tabindex="-1"])'
         )
         const first = focusable[0]
         const last = focusable[focusable.length - 1]
 
+        if (!first) return // nothing focusable - bail out entirely
+
         const handleTab = (e: KeyboardEvent) => {
             if (e.key !== "Tab") return
+            if (focusable.length === 1) {
+                // single element = keep focus pinned
+                e.preventDefault()
+                first.focus()
+                return
+            }
             if (e.shiftKey) {
                 // shift+tab on first -> wrap to last
                 if (document.activeElement === first) {
@@ -98,11 +113,17 @@ export function NavBar() {
         return () => { document.body.style.overflow = "" }
     }, [drawerOpen])
 
-    const closeDrawer = () => {
-        setDrawerOpen(false);
-        // return focus on hamburger on close
-        hamburgerRef.current?.focus();
-    }
+    useEffect(() => { drawerOpenRef.current == drawerOpen; }, [drawerOpen])
+
+    // close drawer on viewport resize past the md breakpoint
+    useEffect((() => {
+        const handleResize = () => {
+            if (window.innerWidth >= 768 && drawerOpen) closeDrawer();
+        }
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }), [closeDrawer])
+
     return (
         <div>
             <header className={cn("fixed top-0 inset-x-0 z-50 h-nav transition-all duration-300",
@@ -123,7 +144,8 @@ export function NavBar() {
 
                     {/* Desktop links */}
                     <ul className="hidden md:flex items-center gap-6 text-sm">
-                        {Object.entries(SECTION_IDS).map(([key, id]) => {
+                        {NAV_LINKS.map((key) => {
+                            const id = SECTION_IDS[key];
                             const isActive = activeId === id;
                             return (
                                 <li key={key}>
@@ -131,8 +153,8 @@ export function NavBar() {
                                         aria-current={isActive ? "page" : undefined}
                                         className={cn("capitalize transition-colors rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent",
                                             isActive
-                                                ? "text-green-600"
-                                                : "text-gray-700 hover:text-gray-400"
+                                                ? "text-accent font-medium"
+                                                : "text-muted-foreground hover:text-foreground"
                                         )}>
                                         {id}
                                     </a>
@@ -148,73 +170,79 @@ export function NavBar() {
                         onClick={() => setDrawerOpen(true)}
                         aria-label="open navigation menu"
                         aria-expanded={drawerOpen}
-                        aria-controls="modile-drawer"
+                        aria-controls="mobile-drawer"
                         className={cn("md:hidden flex flex-col justify-center items-center gap-1.5 w-11 h-nav rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent text-gray-700")}
-                        >
-                        <span className={cn("block h-px w-5 bg-current transition-all duration-300", drawerOpen && "translate-y-2 rotate-45")}/>
-                        <span className={cn("block h-px w-5 bg-current transition-all duration-300", drawerOpen && "opacity-0")}/>
-                        <span className={cn("block h-px w-5 bg-current transition-all duration-300", drawerOpen && "-translate-y-2 rotate-45")}/>
+                    >
+                        <span className={cn("block h-px w-5 bg-current transition-all duration-300", drawerOpen && "translate-y-2 rotate-45")} />
+                        <span className={cn("block h-px w-5 bg-current transition-all duration-300", drawerOpen && "opacity-0")} />
+                        <span className={cn("block h-px w-5 bg-current transition-all duration-300", drawerOpen && "-translate-y-2 rotate-45")} />
                     </button>
                 </nav>
             </header>
 
             {/* Backgrop */}
             {drawerOpen && (
-                <div 
-                className={cn("fixed inset-0 z-40 bg-bg/60 backdrop-blur-sm md:hidden")}
-                aria-hidden="true"
-                onClick={closeDrawer}
+                <div
+                    className={cn("fixed inset-0 z-40 bg-bg/60 backdrop-blur-sm md:hidden")}
+                    aria-hidden="true"
+                    onClick={closeDrawer}
                 />
             )}
 
             {/* Drawer */}
+
             <div
-            id="mobile-drawer"
-            ref={drawerRef}
-            role="dialog"
-            aria-modal="true"
-            aria-label="Navigation menu"
-            tabIndex={-1}
-            className={cn("fixed top-0 right-0 z-50 h-full w-72 bg-surface border-l border-border bg-gray-900",
-                "flex flex-col pt-20 pb-8 px-6 gap-2",
-                "transition-transform duration-300 ease-in-out md:hidden",
-                drawerOpen ? "translate-x-0" : "translate-x-full"
-            )}
+                id="mobile-drawer"
+                ref={drawerRef}
+                role="dialog"
+                aria-modal="true"
+                aria-label="Navigation menu"
+                tabIndex={-1}
+                className={cn("fixed top-0 right-0 z-50 h-full w-72 bg-background border-l border-border",
+                    "flex flex-col pt-20 pb-8 px-6 gap-2",
+                    "transition-transform duration-300 ease-in-out md:hidden",
+                    drawerOpen ? "translate-x-0" : "translate-x-full"
+                )}
             >
                 {/* Close button */}
                 <button
-                onClick={closeDrawer}
-                aria-label="Close navigation menu"
-                className={cn("absolute top-4 right-4 flex items-center justify-center w-11 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent text-text-muted hover: text-text-primary transition-colors")}
+                    onClick={closeDrawer}
+                    aria-label="Close navigation menu"
+                    className={cn("absolute top-4 right-4 flex items-center justify-center w-11 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent text-text-muted hover:text-foreground transition-colors")}
                 >x</button>
-                
+
                 {/* Section links - min 44x44px tap targets */}
                 <nav aria-label="Mobile navigation">
                     <ul className={cn("flex flex-col gap-1")}>
-                        {Object.entries(SECTION_IDS).map(([key, id]) => (
-                            <li key={key}>
-                                <a
-                                href={`#${id}`}
-                                onClick={closeDrawer}
-                                aria-current={activeId === id ? "page" : undefined}
-                                className={cn(
-                                    "flex items-center capitalize min-h-11 px-3 rounded text-base transition-colors",
-                                    "rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent",
-                                    activeId === id
-                                    ? "text-gray-300 bg-accent/30"
-                                    : "text-cyan-300 hover:text-gray-200 hover:bg-surface"
-                                )}
-                                >
-                                    {id}
-                                </a>
-                            </li>
-                        ))}
+                        {NAV_LINKS.map((id) => {
+                            const key = SECTION_IDS[id];
+                            return (
+                                <li key={key}>
+                                    <a
+                                        href={`#${id}`}
+                                        onClick={closeDrawer}
+                                        aria-current={activeId === id ? "page" : undefined}
+                                        className={cn(
+                                            "flex items-center capitalize min-h-11 px-3 rounded text-base transition-colors",
+                                            "rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent",
+                                            activeId === id
+                                                ? "text-accent font-medium bg-accent/10"
+                                                : "text-muted-foreground hover:text-background hover:bg-secondary"
+                                        )}
+                                    >
+                                        {id}
+                                    </a>
+                                </li>
+                            )
+                        })}
                     </ul>
                 </nav>
 
                 {/* Social links at the bottom */}
                 <div className={cn("mt-auto flex gap-4 text-sm text-text-muted")}>
-                    <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer" className={cn("min-h-11 flex items-center hover:text-accent transition-colors rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent")}>LinkedIn ↗</a>
+                    {SOCIAL_LINKS.map(({ href, label }) => (
+                        <a key={label} href={href} target="_blank" rel="noopener noreferrer" className={cn("min-h-11 flex items-center hover:text-accent transition-colors rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent")}>{label} ↗</a>
+                    ))}
                 </div>
             </div>
         </div>
