@@ -6,9 +6,7 @@ export function AboutSection() {
     return (
         <section id={SECTION_IDS.about} className={cn("scroll-mt-nav py-12 md:py-20 px-6")}>
             <h2 className={cn("mb-3 text-4xl font-bold")}>
-                <span className={cn("mr-6 text-3xl font-semibold")}>
-                    {aboutContent.heading.slice(0, 1)}
-                    </span>{aboutContent.heading.slice(1, aboutContent.heading.length)}
+                {aboutContent.heading}
             </h2>
             <div className="space-y-4 max-w-2xl">
                 {aboutContent.paragraphs.map((paragraph, index) => (

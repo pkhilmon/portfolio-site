@@ -8,10 +8,10 @@ describe('HeroSection', () => {
         render(<HeroSection />)
         expect(screen.getByRole('heading', { level: 1, name: heroContent.name })).toBeInTheDocument()
     })
-     
-    it ('renders the eyeblow label', () => {
+
+    it ('renders the eyebrow label', () => {
         render(<HeroSection />)
-        expect(screen.getByText(heroContent.eyeblow)).toBeInTheDocument()
+        expect(screen.getByText(heroContent.eyebrow)).toBeInTheDocument()
     })
 
     it ('render the tagline', () => {
@@ -25,7 +25,7 @@ describe('HeroSection', () => {
         expect(primaryLink).toHaveAttribute('href', `#${SECTION_IDS.contact}`)
     })
 
-    it ('primary CTA links to the projects section', () => {
+    it ('secondary CTA links to the projects section', () => {
         render(<HeroSection />)
         const secondaryLink = screen.getByRole('link', {name: heroContent.secondaryCtaLabel})
         expect(secondaryLink).toHaveAttribute('href', `#${SECTION_IDS.projects}`)
@@ -34,6 +34,6 @@ describe('HeroSection', () => {
     it ('section has the correct id for scroll-spy', () => {
         render(<HeroSection />)
         const section = document.getElementById(SECTION_IDS.hero)
-        expect(section).toBeInTheDocument()
+        expect(section).not.toBeNull()
     })
 })
