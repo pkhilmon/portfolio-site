@@ -1,15 +1,22 @@
 import { cn } from "@/lib/utils"
 import { SECTION_IDS } from "@/lib/constants"
+import { aboutContent } from "@/lib/data/about"
 
 export function AboutSection() {
     return (
-        <section id={SECTION_IDS.about} className={cn("scroll-mt-nav py-20 px-6 md:py-16")}>
+        <section id={SECTION_IDS.about} className={cn("scroll-mt-nav py-12 md:py-20 px-6")}>
             <h2 className={cn("mb-3 text-4xl font-bold")}>
-                <span className={cn("capitalize mr-1 text-accent text-6xl")}>{SECTION_IDS.about.slice(0, 1)}</span>{SECTION_IDS.about.slice(1, SECTION_IDS.about.length)}
+                <span className={cn("mr-6 text-3xl font-semibold")}>
+                    {aboutContent.heading.slice(0, 1)}
+                    </span>{aboutContent.heading.slice(1, aboutContent.heading.length)}
             </h2>
-            <p className={cn("font-normal text-base leading-relaxed")}>
-                Pavlo background (game dev, Java, embedded, Python), the deliberate pivot to frontend/full-stack web, and the explicit framing of breadth as depth — not defensiveness
-            </p>
+            <div className="space-y-4 max-w-2xl">
+                {aboutContent.paragraphs.map((paragraph, index) => (
+                    <p key={index} className={cn("text-base leading-relaxed text-foreground")}>
+                        {paragraph}
+                    </p>
+                ))}
+            </div>
         </section>
     )
 }
