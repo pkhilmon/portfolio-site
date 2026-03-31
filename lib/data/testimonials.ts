@@ -7,6 +7,8 @@ export interface TestimonialItem {
   rating: number
 }
 
+export const testimonialsHeading = 'Testimonials' as const
+
 export const testimonials: TestimonialItem[] = [
   {
     id: 'testimonial-1',

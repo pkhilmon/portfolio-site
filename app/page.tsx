@@ -5,6 +5,7 @@ import { AboutSection } from "@/components/sections/AboutSection";
 import { SECTION_IDS } from "@/lib/constants";
 import { SkillsSection } from "@/components/sections/SkillsSection";
 import { ProjectsSection } from "@/components/sections/ProjectsSection";
+import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
 
 export default function Home() {
 
@@ -16,11 +17,14 @@ export default function Home() {
       <SkillsSection />
       <Separator />
       <ProjectsSection />
+      <Separator className="my-4" />
+      <TestimonialsSection />
       {Object.entries(SECTION_IDS)
         .filter(([, id]) => id !== SECTION_IDS.hero &&
           id !== SECTION_IDS.about &&
           id !== SECTION_IDS.projects &&
-          id !== SECTION_IDS.skills)
+          id !== SECTION_IDS.skills &&
+          id !== SECTION_IDS.testimonials)
         .map(([key, id]) => (
           <div key={key} >
             <Separator />
