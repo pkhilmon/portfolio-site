@@ -9,8 +9,26 @@ import { Footer } from "@/components/layout/Footer";
 const inter = Inter({subsets:['latin'],variable:'--font-inter'});
 
 export const metadata: Metadata = {
-  title: "Pavlo Khilmon - Software Developer",
-  description: "Frontend developer specialising in React and Next.js with a background spanning game dev, Java, embedded systems and Python.",
+  metadataBase: new URL('https://portfolio-site-pi-weld.vercel.app'),
+  title: 'Pavlo Khilmon — Frontend Developer',
+  description: 'Frontend developer specialising in React and Next.js. Background in game dev, embedded systems, and enterprise Java. Available for freelance and full-time roles.',
+  alternates: {
+    canonical: 'https://portfolio-site-pi-weld.vercel.app',
+  },
+  openGraph: {
+    type: 'website',
+    url: 'https://portfolio-site-pi-weld.vercel.app',
+    title: 'Pavlo Khilmon — Frontend Developer',
+    description: 'Frontend developer specialising in React and Next.js. Available for freelance and full-time roles in Europe.',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Pavlo Khilmon — Frontend Developer',
+      },
+    ],
+  },
 };
 
 export const viewport: Viewport = {
