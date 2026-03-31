@@ -40,9 +40,9 @@ describe('ProjectsSection', () => {
         })
     })
 
-    it('renders a GitHub repo link for each project', () => {
+    it('renders a GitHub repo link for each project with a repoUrl', () => {
         render(<ProjectsSection />)
         const githublinks = screen.getAllByRole('link', { name: /github/i })
-        expect(githublinks.length).toBe(projects.length)
+        expect(githublinks.length).toBe(projects.filter(p => p.repoUrl).length)
     })
 })

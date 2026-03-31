@@ -19,7 +19,7 @@ export const projects: ProjectItem[] = [
     title: 'IVV Enterprise System',
     description: 'Java backend development for enterprise workflow management system. Built with Spring Boot microservices handling high-volume transaction processing.',
     stack: ['Java', 'Spring Boot'],
-    repoUrl: 'https://github.com/pkhilmon',
+    repoUrl: undefined,
     imageSrc: '/images/projects/ivv.webp',
     imageAlt: 'IVV enterprise system dashboard',
   },

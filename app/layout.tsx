@@ -1,25 +1,29 @@
-import "@/lib/env";
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { NavBar } from "@/components/layout/NavBar";
 import { Footer } from "@/components/layout/Footer";
+import { SITE_URL } from "@/lib/env";
 
-const inter = Inter({subsets:['latin'],variable:'--font-inter'});
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+
+const DESCRIPTION = 'Frontend developer specialising in React and Next.js. Background in game dev, embedded systems, and enterprise Java. Available for freelance and full-time roles.';
+const OG_DESCRIPTION = 'Frontend developer specialising in React and Next.js. Background in game dev, embedded systems, and enterprise Java. Available for freelance and full-time roles.';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://portfolio-site-pi-weld.vercel.app'),
+  metadataBase: new URL(SITE_URL),
   title: 'Pavlo Khilmon — Frontend Developer',
-  description: 'Frontend developer specialising in React and Next.js. Background in game dev, embedded systems, and enterprise Java. Available for freelance and full-time roles.',
+  description: DESCRIPTION,
   alternates: {
-    canonical: 'https://portfolio-site-pi-weld.vercel.app',
+    canonical: '/',
   },
   openGraph: {
     type: 'website',
-    url: 'https://portfolio-site-pi-weld.vercel.app',
+    siteName: 'Pavlo Khilmon',
+    url: SITE_URL,
     title: 'Pavlo Khilmon — Frontend Developer',
-    description: 'Frontend developer specialising in React and Next.js. Available for freelance and full-time roles in Europe.',
+    description: OG_DESCRIPTION,
     images: [
       {
         url: '/og-image.png',
@@ -28,6 +32,12 @@ export const metadata: Metadata = {
         alt: 'Pavlo Khilmon — Frontend Developer',
       },
     ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Pavlo Khilmon — Frontend Developer',
+    description: OG_DESCRIPTION,
+    images: ['/og-image.png'],
   },
 };
 
@@ -46,7 +56,7 @@ export default function RootLayout({
       <body className={cn("font-inter", "antialiased")}>
         <a href="#main-content" className="sr-only focus:not-sr-only">Skip to content</a>
         <NavBar />
-          {children}
+        {children}
         <Footer />
       </body>
     </html>
