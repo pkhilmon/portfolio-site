@@ -1,11 +1,10 @@
-import { cn } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { AboutSection } from "@/components/sections/AboutSection";
-import { SECTION_IDS } from "@/lib/constants";
 import { SkillsSection } from "@/components/sections/SkillsSection";
 import { ProjectsSection } from "@/components/sections/ProjectsSection";
 import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
+import { ContactSection } from "@/components/sections/ContactSection";
 
 export default function Home() {
 
@@ -17,22 +16,10 @@ export default function Home() {
       <SkillsSection />
       <Separator />
       <ProjectsSection />
-      <Separator className="my-4" />
+      <Separator />
       <TestimonialsSection />
-      {Object.entries(SECTION_IDS)
-        .filter(([, id]) => id !== SECTION_IDS.hero &&
-          id !== SECTION_IDS.about &&
-          id !== SECTION_IDS.projects &&
-          id !== SECTION_IDS.skills &&
-          id !== SECTION_IDS.testimonials)
-        .map(([key, id]) => (
-          <div key={key} >
-            <Separator />
-            <section id={`${id}`} className={cn("capitalize min-h-screen scroll-mt-nav")}>
-              {id}
-            </section>
-          </div>
-        ))}
+      <Separator/>
+      <ContactSection />
     </main>
   );
 }

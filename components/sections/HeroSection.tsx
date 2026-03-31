@@ -1,7 +1,5 @@
-"use client"
-
 import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button-variants";
 import { SECTION_IDS } from "@/lib/constants";
 import { heroContent } from "@/lib/data/hero";
 
