@@ -136,7 +136,7 @@ export function NavBar() {
                     aria-label="Primary navigation"
                 >
                     <Link href="/" className={cn("text-sm font-semibold text-gray-700 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent")}>
-                        {HEADER_TITLE}<span className="text-accent">.</span>
+                        {HEADER_TITLE}
                     </Link>
                     {/* <a href="/" className="text-sm font-semibold tracking-tight text-text-primary text-gray-500">
                         Pavlo Khilmon<span className="text-accent">.</span>

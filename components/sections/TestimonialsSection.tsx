@@ -23,7 +23,7 @@ function TestimonialCard({ testimonial }: { testimonial: TestimonialItem }) {
 
 export function TestimonialsSection() {
   return (
-    <section id={SECTION_IDS.testimonials} className={cn('scroll-mt-nav py-12 md:py-20 px-6')}>
+    <section id={SECTION_IDS.testimonials} className={cn('scroll-mt-nav py-12 md:py-20 px-6', 'hidden')}>
       <h2 className={cn('mb-6 text-3xl font-semibold')}>{testimonialsHeading}</h2>
       <div className={cn('flex flex-col gap-8')}>
         {testimonials.map(testimonial => (

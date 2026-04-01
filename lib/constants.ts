@@ -7,9 +7,9 @@ export const SECTION_IDS = {
     contact: "contact",
 } as const;
 
-export const NAV_LINKS = ["about", "skills", "projects", "testimonials", "contact"] as const satisfies ReadonlyArray<keyof typeof SECTION_IDS>;
+export const NAV_LINKS = ["about", "skills", "projects", "contact"] as const satisfies ReadonlyArray<keyof typeof SECTION_IDS>;
 
-export const HEADER_TITLE = "Portfolio" as const;
+export const HEADER_TITLE = "Pavlo Khilmon" as const;
 export const FORMSPREE_URL = process.env.NEXT_PUBLIC_FORMSPREE_URL ?? "";
 export const EMAIL = process.env.NEXT_PUBLIC_EMAIL ?? "";
 export const LANDING_PAGE_REPO = 'https://github.com/pkhilmon/portfolio-site' as const;
