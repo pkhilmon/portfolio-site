@@ -14,7 +14,7 @@ export function Footer() {
                         className={cn(
                             "inline-flex items-center justify-center rounded-md h-6 gap-1 px-2",
                             "text-xs/relaxed font-medium transition-all outline-none select-none",
-                            "hover:bg-muted hover:text-foreground",
+                            "hover:bg-accent/10 hover:text-accent",
                             "focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/30"
                         )}>
                             {label} <span className={cn("text-accent")}>↗</span>

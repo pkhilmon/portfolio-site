@@ -7,11 +7,10 @@ export function HeroSection() {
     return (
         <section id={SECTION_IDS.hero} className={cn("scroll-mt-nav px-6 py-12 md:py-20")}>
             <h1 className={cn("mb-4 text-5xl font-bold leading-tight tracking-tight")}>
-                <span className={cn("underline underline-offset-6 decoration-6 decoration-accent")}>
-                    {heroContent.firstName}
+                    {heroContent.firstName} {heroContent.lastName}
+                {/* <span className={cn("underline underline-offset-6 decoration-6 decoration-accent")}>
                 </span> <mark className={cn("px-3 pb-0.5 text-white bg-accent rounded-2xl")}>
-                    {heroContent.lastName}
-                </mark>
+                </mark> */}
             </h1>
             <p className={cn("mb-4 text-sm font-medium text-accent uppercase tracking-wide")}>
                 {heroContent.eyebrow}

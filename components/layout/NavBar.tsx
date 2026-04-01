@@ -240,7 +240,7 @@ export function NavBar() {
                                             "rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent",
                                             activeId === id
                                                 ? "text-accent font-medium bg-accent/10"
-                                                : "text-muted-foreground hover:text-foreground hover:bg-secondary"
+                                                : "text-muted-foreground hover:text-accent hover:bg-accent/10"
                                         )}
                                     >
                                         {id}
@@ -258,7 +258,7 @@ export function NavBar() {
                     onClick={closeDrawer}
                     className={cn(
                         "flex items-center min-h-11 px-3 rounded text-sm text-muted-foreground",
-                        "hover:text-foreground transition-colors",
+                        "hover:text-accent transition-colors",
                         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                     )}
                 >

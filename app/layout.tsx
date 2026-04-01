@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { NavBar } from "@/components/layout/NavBar";
 import { Footer } from "@/components/layout/Footer";
 import { SITE_URL } from "@/lib/env";
+import { ACTIVE_THEME } from "@/lib/constants";
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
@@ -52,7 +53,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-theme="clean" className={cn(inter.variable)}>
+    <html lang="en" data-theme={ACTIVE_THEME} className={cn(inter.variable)}>
       <body className={cn("font-inter", "antialiased")}>
         <a href="#main-content" className="sr-only focus:not-sr-only">Skip to content</a>
         <NavBar />
