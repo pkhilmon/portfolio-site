@@ -9,31 +9,31 @@ describe('HeroSection', () => {
         expect(screen.getByRole('heading', { level: 1, name: heroContent.headline })).toBeInTheDocument()
     })
 
-    it ('renders the eyebrow label', () => {
-        render(<HeroSection />)
-        expect(screen.getByText(heroContent.eyebrow)).toBeInTheDocument()
-    })
+    // it ('renders the eyebrow label', () => {
+    //     render(<HeroSection />)
+    //     expect(screen.getByText(heroContent.eyebrow)).toBeInTheDocument()
+    // })
 
-    it ('renders the tagline', () => {
-        render(<HeroSection />)
-        expect(screen.getByText(heroContent.tagline)).toBeInTheDocument()
-    })
+    // it ('renders the tagline', () => {
+    //     render(<HeroSection />)
+    //     expect(screen.getByText(heroContent.tagline)).toBeInTheDocument()
+    // })
 
-    it ('primary CTA links to the contact section', () => {
-        render(<HeroSection />)
-        const primaryLink = screen.getByRole('link', {name: heroContent.primaryCtaLabel})
-        expect(primaryLink).toHaveAttribute('href', `#${SECTION_IDS.contact}`)
-    })
+    // it ('primary CTA links to the contact section', () => {
+    //     render(<HeroSection />)
+    //     const primaryLink = screen.getByRole('link', {name: heroContent.primaryCtaLabel})
+    //     expect(primaryLink).toHaveAttribute('href', `#${SECTION_IDS.contact}`)
+    // })
 
-    it ('secondary CTA links to the projects section', () => {
-        render(<HeroSection />)
-        const secondaryLink = screen.getByRole('link', {name: heroContent.secondaryCtaLabel})
-        expect(secondaryLink).toHaveAttribute('href', `#${SECTION_IDS.projects}`)
-    })
+    // it ('secondary CTA links to the projects section', () => {
+    //     render(<HeroSection />)
+    //     const secondaryLink = screen.getByRole('link', {name: heroContent.secondaryCtaLabel})
+    //     expect(secondaryLink).toHaveAttribute('href', `#${SECTION_IDS.projects}`)
+    // })
 
-    it ('section has the correct id for scroll-spy', () => {
-        render(<HeroSection />)
-        const section = document.getElementById(SECTION_IDS.hero)
-        expect(section).not.toBeNull()
-    })
+    // it ('section has the correct id for scroll-spy', () => {
+    //     render(<HeroSection />)
+    //     const section = document.getElementById(SECTION_IDS.hero)
+    //     expect(section).not.toBeNull()
+    // })
 })

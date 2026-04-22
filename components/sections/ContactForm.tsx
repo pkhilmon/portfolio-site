@@ -5,7 +5,6 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { FORMSPREE_URL } from "@/lib/constants";
 
 type SubmitStatus = 'idle' | 'loading' | 'success' | 'error'
 
@@ -20,14 +19,6 @@ export function ContactForm({ className }: ContactFormProps) {
         e.preventDefault()
         setStatus('loading')
 
-        if (!FORMSPREE_URL) {
-            if (process.env.NODE_ENV === 'development') {
-                console.log('[ContactForm] NEXT_PUBLIC_FORMSPREE_URL is not set')
-            }
-            setStatus('error')
-            return
-        }
-
         try {
             const form = e.currentTarget
             const nameEl = form.elements.namedItem('name') as HTMLInputElement | null
@@ -41,7 +32,7 @@ export function ContactForm({ className }: ContactFormProps) {
                 email: emailEl.value,
                 message: messageEl.value,
             }
-            const res = await fetch(FORMSPREE_URL, {
+            const res = await fetch('/api/contact', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
                 body: JSON.stringify(data),

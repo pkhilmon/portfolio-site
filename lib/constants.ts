@@ -12,7 +12,6 @@ export const NAV_LINKS = ["about", "skills", "projects", "contact"] as const sat
 export const HEADER_TITLE = "Pavlo Khilmon" as const;
 // "teal" uses :root defaults; "indigo" applies [data-theme="indigo"] overrides
 export const ACTIVE_THEME = "indigo" as const satisfies "teal" | "indigo";
-export const FORMSPREE_URL = process.env.NEXT_PUBLIC_FORMSPREE_URL ?? "";
 export const EMAIL = process.env.NEXT_PUBLIC_EMAIL ?? "";
 export const LANDING_PAGE_REPO = 'https://github.com/pkhilmon/portfolio-site' as const;
 
