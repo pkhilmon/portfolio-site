@@ -12,8 +12,8 @@ describe('Footer', () => {
 
   it('social links open in new tab with noopener', () => {
     render(<Footer />)
-    const links = screen.getAllByRole('link')
-    links.forEach((link) => {
+    SOCIAL_LINKS.forEach(({ label }) => {
+      const link = screen.getByRole('link', { name: new RegExp(label, 'i') })
       expect(link).toHaveAttribute('target', '_blank')
       expect(link).toHaveAttribute('rel', 'noopener noreferrer')
     })
@@ -29,10 +29,26 @@ describe('Footer', () => {
 
   it('renders ↗ suffix on each social link', () => {
     render(<Footer />)
-    const links = screen.getAllByRole('link')
-    links.forEach((link) => {
+    SOCIAL_LINKS.forEach(({ label }) => {
+      const link = screen.getByRole('link', { name: new RegExp(label, 'i') })
       expect(link.textContent).toContain('↗')
     })
+  })
+
+  it('renders Impressum and Datenschutz footer links', () => {
+    render(<Footer />)
+    const impressum = screen.getByRole('link', { name: /impressum/i })
+    const datenschutz = screen.getByRole('link', { name: /datenschutz/i })
+    expect(impressum).toHaveAttribute('href', '/impressum')
+    expect(datenschutz).toHaveAttribute('href', '/datenschutzerklaerung')
+  })
+
+  it('legal footer links are internal (no target blank)', () => {
+    render(<Footer />)
+    const impressum = screen.getByRole('link', { name: /impressum/i })
+    const datenschutz = screen.getByRole('link', { name: /datenschutz/i })
+    expect(impressum).not.toHaveAttribute('target', '_blank')
+    expect(datenschutz).not.toHaveAttribute('target', '_blank')
   })
 
   it('renders a QR code button', () => {

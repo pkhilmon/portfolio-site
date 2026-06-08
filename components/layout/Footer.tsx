@@ -3,14 +3,31 @@ import { SOCIAL_LINKS } from "@/lib/constants";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { LinkSquare01Icon } from "@hugeicons/core-free-icons";
 import { QRCodeButton } from "../ui/QRCodeButton";
+import Link from "next/link";
 
 export function Footer() {
     return (
         <footer className="border-t border-border py-10">
             <div className="mx-auto flex max-w-5xl flex-col items-center gap-4 px-6 text-sm sm:flex-row sm:justify-between">
-                <p className="text-muted-foreground">
-                    © {new Date().getFullYear()} — Built with Next.js &amp; Tailwind
-                </p>
+                <div className="flex flex-col gap-1">
+                    <p className="text-muted-foreground">
+                        © {new Date().getFullYear()} — Built with Next.js &amp; Tailwind
+                    </p>
+                    <div className="flex gap-3">
+                        <Link
+                            href="/impressum"
+                            className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+                        >
+                            Impressum
+                        </Link>
+                        <Link
+                            href="/datenschutzerklaerung"
+                            className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+                        >
+                            Datenschutz
+                        </Link>
+                    </div>
+                </div>
                 <div className={cn("flex gap-2")}>
                     {SOCIAL_LINKS.map(({ href, label }) => (
                         <a key={label} href={href} target="_blank" rel="noopener noreferrer"
