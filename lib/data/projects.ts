@@ -4,6 +4,7 @@ export interface ProjectItem {
   description: string
   stack: string[]
   liveUrl?: string
+  gitUrl?: string
   imageSrc: string
   imageAlt: string
 }
@@ -28,6 +29,16 @@ export const projects: ProjectItem[] = [
     liveUrl: 'https://pavlokhilmon.com',
     imageSrc: '/images/projects/landing-page.webp',
     imageAlt: 'Portfolio landing page screenshot',
+  },
+  {
+    id: 'habitus-from-figma',
+    title: 'From Figma to Website',
+    description: '',
+    stack: ['Figma', 'Next.js', 'TypeScript', 'Tailwind CSS'],
+    liveUrl: 'https://habitus-from-figma.vercel.app',
+    gitUrl: 'https://github.com/pkhilmon/habitus-from-figma',
+    imageSrc: '/images/projects/habitus-figma.webp',
+    imageAlt: 'Pixel perfect conversion from Figma design to website'
   },
   {
     id: 'bubble-burst-html5-game',
