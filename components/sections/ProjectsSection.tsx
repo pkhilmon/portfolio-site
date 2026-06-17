@@ -6,7 +6,7 @@ import { projectsHeading, projects, ProjectItem } from "@/lib/data/projects";
 import { Badge } from "../ui/badge";
 import { ProjectCardImage } from "./ProjectCardImage";
 import { HugeiconsIcon } from '@hugeicons/react';
-import { LinkSquare01Icon } from "@hugeicons/core-free-icons";
+import { LinkSquare01Icon, Github01Icon } from "@hugeicons/core-free-icons";
 import { useState } from "react";
 
 function ProjectCard({ project }: { project: ProjectItem }) {
@@ -25,6 +25,7 @@ function ProjectCard({ project }: { project: ProjectItem }) {
                         </li>
                     ))}
                 </ul>
+                <div className={cn("flex flex-row gap-2")}>
                 {project.liveUrl ? (
                     <a
                         href={project.liveUrl}
@@ -38,8 +39,19 @@ function ProjectCard({ project }: { project: ProjectItem }) {
                     </a>
                 ) : (
                     <span className={cn('text-xs text-muted-foreground italic')}>In development</span>
-                )
-                }
+                )}
+                {project.gitUrl && (
+                    <a
+                        href={project.gitUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`Github - ${project.title}`}
+                        className={cn("text-sm font-medium self-start inline-flex items-center gap-1.5 border border-border rounded-full px-3 py-1 hover:bg-muted transition-colors")}
+                    >
+                        <HugeiconsIcon icon={Github01Icon} size={20}/> GitHub
+                    </a>
+                )}
+                </div>
             </div>
         </div>
     )
