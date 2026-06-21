@@ -17,7 +17,7 @@ export const projects: ProjectItem[] = [
     title: 'Photographer portfolio',
     description: 'Photographer portfolio is a modern personal website that showcases professional experience, technical skills, and real-world web development projects in a clean and responsive layout. It highlights expertise in front-end development with Next.js, and TailwindCSS while making it easy for visitors to explore projects and connect for future opportunities.',
     stack: ['Next.js', 'TypeScript', 'Tailwind CSS'],
-    liveUrl: 'https://vn-portfolio-app.vercel.app/',
+    liveUrl: 'https://www.vladlena-fotografie.de',
     imageSrc: '/images/projects/vn-photo-portfolio.webp',
     imageAlt: 'VN photographer portfolio screenshot',
   },
