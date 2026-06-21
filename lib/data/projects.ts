@@ -33,7 +33,7 @@ export const projects: ProjectItem[] = [
   {
     id: 'habitus-from-figma',
     title: 'From Figma to Website',
-    description: '',
+    description: 'Translating Figma designs into Next.js applications using Tailwind CSS, with strict adherence to spacing, typography, color tokens, and component hierarchy defined in the source file.',
     stack: ['Figma', 'Next.js', 'TypeScript', 'Tailwind CSS'],
     liveUrl: 'https://habitus-from-figma.vercel.app',
     gitUrl: 'https://github.com/pkhilmon/habitus-from-figma',
