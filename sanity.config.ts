@@ -3,7 +3,7 @@ import { structureTool } from "sanity/structure";
 import { visionTool } from "@sanity/vision";
 import { schemaTypes } from "@/sanity/schemaTypes";
 import { structure } from "@/sanity/structure";
-import { projectId, dataset, apiVersion } from "@/lib/sanity/env";
+import { projectId, dataset, apiVersion } from "@/sanity/lib/env";
 import { publishToSiteTool } from "@/sanity/tools/publishToSiteTool";
 
 const SINGLETON_TYPES = new Set(["hero", "about", "contact", "projectsSettings"]);
