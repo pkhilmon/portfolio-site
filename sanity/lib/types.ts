@@ -3,7 +3,7 @@ import type { SanityImageSource } from "@sanity/image-url";
 export interface HeroContent {
     eyebrow: string;
     headline: string;
-    tagline?: string;
+    tagline: string;
     primaryCtaLabel: string;
     bookACallLabel: string;
 }

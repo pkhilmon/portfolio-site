@@ -20,8 +20,8 @@ export const hero = defineType({
         defineField({
             name: "tagline",
             title: "Tagline",
-            description: "Not currently displayed on the page (commented out in HeroSection) — kept for when it's reintroduced.",
             type: "string",
+            validation: (Rule) => Rule.required(),
         }),
         defineField({
             name: "primaryCtaLabel",
