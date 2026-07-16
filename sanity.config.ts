@@ -4,6 +4,7 @@ import { visionTool } from "@sanity/vision";
 import { schemaTypes } from "@/sanity/schemaTypes";
 import { structure } from "@/sanity/structure";
 import { projectId, dataset, apiVersion } from "@/lib/sanity/env";
+import { publishToSiteTool } from "@/sanity/tools/publishToSiteTool";
 
 const SINGLETON_TYPES = new Set(["hero", "about", "contact", "projectsSettings"]);
 
@@ -14,6 +15,7 @@ export default defineConfig({
     dataset,
     basePath: "/studio",
     plugins: [structureTool({ structure }), visionTool({ defaultApiVersion: apiVersion })],
+    tools: (prev) => [...prev, publishToSiteTool()],
     schema: { types: schemaTypes },
     document: {
         actions: (prev, context) =>
