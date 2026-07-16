@@ -1,5 +1,5 @@
 import { createClient } from "@sanity/client";
-import { projectId, dataset, apiVersion } from "@/sanity/sanity/env";
+import { projectId, dataset, apiVersion } from "@/sanity/lib/env";
 
 export const client = createClient({
     projectId,
