@@ -32,3 +32,5 @@ export interface ProjectItem {
     image: SanityImageSource;
     imageAlt: string;
 }
+
+export type ProjectWithImageUrl = Omit<ProjectItem, "image"> & { imageUrl: string };

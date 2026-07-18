@@ -6,15 +6,14 @@ import { Badge } from "@/components/ui/badge";
 import { HugeiconsIcon } from '@hugeicons/react';
 import { LinkSquare01Icon, Github01Icon } from "@hugeicons/core-free-icons";
 import { useState } from "react";
-import { urlFor } from "@/sanity/lib/image";
-import type { ProjectItem } from "@/sanity/lib/types";
+import type { ProjectWithImageUrl } from "@/sanity/lib/types";
 
-function ProjectCard({ project }: { project: ProjectItem }) {
+function ProjectCard({ project }: { project: ProjectWithImageUrl }) {
     return (
         <div className={cn("flex flex-col md:flex-row bg-card text-card-foreground ring-1 ring-foreground/10 rounded-lg overflow-hidden transition-all duration-200 hover:shadow-md hover:-translate-y-0.5")}>
             <div className={cn('flex-shring-0 md:w-2/5 md:self-stretch')}>
                 <ProjectCardImage
-                    src={urlFor(project.image).width(600).height(400).url()}
+                    src={project.imageUrl}
                     alt={project.imageAlt}
                 />
             </div>
@@ -60,7 +59,7 @@ function ProjectCard({ project }: { project: ProjectItem }) {
     )
 }
 
-export function ProjectsList({ projects }: { projects: ProjectItem[] }) {
+export function ProjectsList({ projects }: { projects: ProjectWithImageUrl[] }) {
     const [showAll, setShowAll] = useState(false)
     const visible = showAll ? projects : projects.slice(0, 3);
 
