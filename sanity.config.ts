@@ -13,7 +13,6 @@ export default defineConfig({
     title: "Pavlo Khilmon — Content",
     projectId,
     dataset,
-    basePath: "/studio",
     plugins: [structureTool({ structure }), visionTool({ defaultApiVersion: apiVersion })],
     tools: (prev) => [...prev, publishToSiteTool()],
     schema: { types: schemaTypes },

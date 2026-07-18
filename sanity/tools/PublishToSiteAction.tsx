@@ -17,10 +17,11 @@ export function PublishToSiteAction() {
     const handleClick = async () => {
         setStatus("loading");
         try {
-            const res = await fetch("/api/revalidate", {
+            const siteUrl = process.env.SANITY_STUDIO_SITE_URL ?? "";
+            const res = await fetch(`${siteUrl}/api/revalidate`, {
                 method: "POST",
                 headers: {
-                    "x-revalidate-secret": process.env.NEXT_PUBLIC_SANITY_REVALIDATE_SECRET ?? "",
+                    "x-revalidate-secret": process.env.SANITY_STUDIO_REVALIDATE_SECRET ?? "",
                 },
             });
             setStatus(res.ok ? "success" : "error");
