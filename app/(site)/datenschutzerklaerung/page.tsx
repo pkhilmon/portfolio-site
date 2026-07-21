@@ -136,8 +136,8 @@ export default function DatenschutzerklaerungPage() {
           <br />
           Telefon: +49 (0) 1608069568<br />
           E-Mail:{" "}
-          <a href="mailto:pavlo.khilmon@gmail.com" className="underline hover:no-underline">
-            pavlo.khilmon@gmail.com
+          <a href="mailto:contact@pavlokhilmon.com" className="underline hover:no-underline">
+            contact@pavlokhilmon.com
           </a>
         </address>
         <p>
