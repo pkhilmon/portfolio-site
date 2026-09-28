@@ -36,6 +36,14 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
 
+## Planned: remove Sanity
+Decided 2026-09-28: the site will be rebuilt without Sanity, with all content in code.
+First step done: `lib/local-projects.ts` holds project cards rendered before the Sanity ones
+(the DLRG case study is the first). Next: move the remaining projects, hero, about and
+contact copy into code, then delete `sanity/`, `sanity.config.ts`, `sanity.cli.ts`, the
+Studio tool, `/api/revalidate` and the `@sanity/*` / `next-sanity` / `sanity` dependencies.
+Search for `TODO(remove-sanity)`. Until then, the checklist below still applies.
+
 ## Sanity checklist 
 The checklist for this codebase, following the pattern:
 

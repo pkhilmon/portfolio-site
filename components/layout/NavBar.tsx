@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { useEffect, useState, useRef, useCallback } from "react"
 import { SECTION_IDS, NAV_LINKS, SOCIAL_LINKS, HEADER_TITLE } from "@/lib/constants"
@@ -14,6 +15,9 @@ export function NavBar() {
     const [scrolled, setScrolled] = useState<boolean>(false)
     const [drawerOpen, setDrawerOpen] = useState<boolean>(false)
     const [heroInView, setHeroInView] = useState<boolean>(true)
+    const pathname = usePathname()
+    // Only the home page has a hero; every other page shows the name from the start
+    const hideTitle = pathname === "/" && heroInView
 
     const drawerRef = useRef<HTMLDivElement>(null)
     const hamburgerRef = useRef<HTMLButtonElement>(null)
@@ -57,7 +61,7 @@ export function NavBar() {
         )
         observer.observe(hero)
         return () => observer.disconnect()
-    }, [])
+    }, [pathname]) // NavBar lives in the layout, so re-observe the new hero after client navigation back to /
 
     // scroll threshold for frosted glass
     useEffect(() => {
@@ -153,7 +157,7 @@ export function NavBar() {
                     <Link href="/" className={cn(
                         "uppercase text-sm font-semibold text-gray-700 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent",
                         "transition-all duration-300",
-                        heroInView ? "opacity-0 pointer-events-none" : "opacity-100"
+                        hideTitle ? "opacity-0 pointer-events-none" : "opacity-100"
                     )}>
                         {HEADER_TITLE}
                     </Link>
