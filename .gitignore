@@ -17,10 +17,6 @@
 /.next/
 /out/
 
-# sanity
-/.sanity/
-/dist/
-
 # production
 /build
 

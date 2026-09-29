@@ -35,33 +35,9 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
+## Content
 
-## Planned: remove Sanity
-Decided 2026-09-28: the site will be rebuilt without Sanity, with all content in code.
-First step done: `lib/local-projects.ts` holds project cards rendered before the Sanity ones
-(the DLRG case study is the first). Next: move the remaining projects, hero, about and
-contact copy into code, then delete `sanity/`, `sanity.config.ts`, `sanity.cli.ts`, the
-Studio tool, `/api/revalidate` and the `@sanity/*` / `next-sanity` / `sanity` dependencies.
-Search for `TODO(remove-sanity)`. Until then, the checklist below still applies.
-
-## Sanity checklist 
-The checklist for this codebase, following the pattern:
-
-1. Schema — new file in sanity/schemaTypes/<name>.ts (defineType/defineField, required-field validation). Add it to the array in sanity/schemaTypes/index.ts.
-
-2. Studio structure — in sanity/structure.ts: if it's a singleton (like Hero/About), add a fixed-id entry like the existing ones and add the type name to SINGLETON_TYPES in
-sanity.config.ts (locks delete/duplicate). If it's a collection (like Projects), it can list automatically or get an explicit sorted entry.
-
-3. Type — add the shape to sanity/lib/types.ts.
-
-4. Fetch function — new getX() in sanity/lib/queries.ts, same pattern as the others (tagged sanity-content, revalidate: false).
-
-5. Wire into the homepage — add the fetch to the Promise.allSettled([...]) array in app/(site)/page.tsx, handle fulfilled/rejected, pass as props.
-
-6. Section component — new components/sections/XSection.tsx, plain sync function taking content as props (no static import, 'use client' only if it needs interactivity).
-
-7. Nav/anchor — if it's a navigable section, add an entry to SECTION_IDS/NAV_LINKS in lib/constants.ts.
-
-8. Redeploy both halves — schema changes need sanity deploy (Studio) again, and the component/query/page changes need a normal push-to-main deploy (Next.js/Vercel).
-
-9. Create + publish the content, then click "Publish to site" in Studio to bust the cache tag so it goes live.
+All copy lives in `lib/data/*.ts` (hero, about, contact, projects). Edit, commit, push —
+Vercel redeploys. Card images go in `public/images/projects/`. A case study gets its own
+route under `app/(site)/work/<slug>/` (images in `public/images/work/<slug>/`), a
+`caseStudyUrl` on the project entry, and an entry in `app/sitemap.ts`.
