@@ -10,6 +10,7 @@ export const SECTION_IDS = {
 export const NAV_LINKS = ["about", "skills", "projects", "contact"] as const satisfies ReadonlyArray<keyof typeof SECTION_IDS>;
 
 export const HEADER_TITLE = "Pavlo Khilmon" as const;
+export const JOB_TITLE = "Frontend Developer" as const;
 // "teal" uses :root defaults; "indigo" applies [data-theme="indigo"] overrides
 export const ACTIVE_THEME = "indigo" as const satisfies "teal" | "indigo";
 export const EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "";

@@ -11,5 +11,6 @@ if (!process.env.NEXT_PUBLIC_SITE_URL) {
     console.warn("[config] NEXT_PUBLIC_SITE_URL is not set - SEO metadata will use fallback URL");
 }
 
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ??
-    'https://pavlokhilmon.com';
+// Trailing slash trimmed so `${SITE_URL}/path` never yields a double slash
+export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ??
+    'https://pavlokhilmon.com').replace(/\/+$/, '');

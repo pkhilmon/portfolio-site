@@ -25,20 +25,11 @@ export const metadata: Metadata = {
     url: SITE_URL,
     title: 'Pavlo Khilmon — Frontend Developer',
     description: OG_DESCRIPTION,
-    images: [
-      {
-        url: '/og-image.png',
-        width: 1200,
-        height: 630,
-        alt: 'Pavlo Khilmon — Frontend Developer',
-      },
-    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Pavlo Khilmon — Frontend Developer',
     description: OG_DESCRIPTION,
-    images: ['/og-image.png'],
   },
 };
 

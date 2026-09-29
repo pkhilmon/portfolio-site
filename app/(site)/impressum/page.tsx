@@ -1,10 +1,25 @@
-import { EMAIL } from "@/lib/constants";
+import { EMAIL, HEADER_TITLE } from "@/lib/constants";
 import type { Metadata } from "next";
 
+const TITLE = `Impressum — ${HEADER_TITLE}`;
+const DESCRIPTION = 'Impressum und Kontaktangaben gemäß § 5 DDG.';
+
 export const metadata: Metadata = {
-  title: 'Impressum — Pavlo Khilmon',
-  description: 'Impressum und Kontaktangaben gemäß § 5 TMG.',
+  title: TITLE,
+  description: DESCRIPTION,
   alternates: { canonical: '/impressum' },
+  openGraph: {
+    type: 'website',
+    siteName: HEADER_TITLE,
+    url: '/impressum',
+    title: TITLE,
+    description: DESCRIPTION,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: TITLE,
+    description: DESCRIPTION,
+  },
 };
 
 export default function ImpressumPage() {

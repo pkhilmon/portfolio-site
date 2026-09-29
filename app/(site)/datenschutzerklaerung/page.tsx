@@ -1,9 +1,25 @@
 import type { Metadata } from "next";
+import { HEADER_TITLE } from "@/lib/constants";
+
+const TITLE = `Datenschutzerklärung — ${HEADER_TITLE}`;
+const DESCRIPTION = 'Datenschutzerklärung gemäß DSGVO.';
 
 export const metadata: Metadata = {
-  title: 'Datenschutzerklärung — Pavlo Khilmon',
-  description: 'Datenschutzerklärung gemäß DSGVO.',
+  title: TITLE,
+  description: DESCRIPTION,
   alternates: { canonical: '/datenschutzerklaerung' },
+  openGraph: {
+    type: 'website',
+    siteName: HEADER_TITLE,
+    url: '/datenschutzerklaerung',
+    title: TITLE,
+    description: DESCRIPTION,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: TITLE,
+    description: DESCRIPTION,
+  },
 };
 
 export default function DatenschutzerklaerungPage() {
@@ -28,7 +44,7 @@ export default function DatenschutzerklaerungPage() {
         <h4 className="font-semibold">Wer ist verantwortlich für die Datenerfassung auf dieser Website?</h4>
         <p>
           Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen
-          Kontaktdaten können Sie dem Abschnitt „Hinweis zur verantwortlichen Stelle" in dieser
+          Kontaktdaten können Sie dem Abschnitt „Hinweis zur verantwortlichen Stelle“ in dieser
           Datenschutzerklärung entnehmen.
         </p>
 

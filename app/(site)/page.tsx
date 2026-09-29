@@ -5,6 +5,7 @@ import { SkillsSection } from "@/components/sections/SkillsSection";
 import { ProjectsSection } from "@/components/sections/ProjectsSection";
 import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
 import { ContactSection } from "@/components/sections/ContactSection";
+import { PersonJsonLd } from "@/components/seo/PersonJsonLd";
 import { getHero, getAbout, getProjectsSettings, getProjects, getContact } from "@/sanity/lib/queries";
 
 const QUERY_LABELS = ["hero", "about", "projectsSettings", "projects", "contact"] as const;
@@ -34,6 +35,7 @@ export default async function Home() {
 
   return (
     <main id="main-content" tabIndex={-1} className="mx-auto max-w-4xl py-nav px-4 sm:px-6 lg:px-8">
+      <PersonJsonLd />
       {hero && <HeroSection content={hero} />}
       {about && <AboutSection content={about} />}
       <Separator />
