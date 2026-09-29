@@ -12,7 +12,7 @@ import type { ProjectItem } from "@/lib/data/projects";
 function ProjectCard({ project }: { project: ProjectItem }) {
     return (
         <div className={cn("flex flex-col md:flex-row bg-card text-card-foreground ring-1 ring-foreground/10 rounded-lg overflow-hidden transition-all duration-200 hover:shadow-md hover:-translate-y-0.5")}>
-            <div className={cn('flex-shring-0 md:w-2/5 md:self-stretch')}>
+            <div className={cn('shrink-0 md:w-2/5 md:self-stretch')}>
                 <ProjectCardImage
                     src={project.imageUrl}
                     alt={project.imageAlt}
