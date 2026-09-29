@@ -7,9 +7,9 @@ import { HugeiconsIcon } from '@hugeicons/react';
 import { LinkSquare01Icon, Github01Icon } from "@hugeicons/core-free-icons";
 import Link from "next/link";
 import { useState } from "react";
-import type { ProjectCardData } from "@/lib/local-projects";
+import type { ProjectItem } from "@/lib/data/projects";
 
-function ProjectCard({ project }: { project: ProjectCardData }) {
+function ProjectCard({ project }: { project: ProjectItem }) {
     return (
         <div className={cn("flex flex-col md:flex-row bg-card text-card-foreground ring-1 ring-foreground/10 rounded-lg overflow-hidden transition-all duration-200 hover:shadow-md hover:-translate-y-0.5")}>
             <div className={cn('flex-shring-0 md:w-2/5 md:self-stretch')}>
@@ -29,47 +29,47 @@ function ProjectCard({ project }: { project: ProjectCardData }) {
                     ))}
                 </ul>
                 <div className={cn("flex flex-row flex-wrap gap-2")}>
-                {project.caseStudyUrl && (
-                    <Link
-                        href={project.caseStudyUrl}
-                        aria-label={`Case study - ${project.title}`}
-                        className={cn("text-sm font-medium self-start inline-flex items-center gap-1.5 rounded-full px-3 py-1 bg-accent text-accent-foreground hover:bg-accent/80 transition-colors")}
-                    >
-                        Read case study →
-                    </Link>
-                )}
-                {project.liveUrl ? (
-                    <a
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={`Visit ${project.title}`}
-                        className={cn("text-sm font-medium self-start inline-flex items-center gap-1.5 border border-border rounded-full px-3 py-1 hover:bg-muted transition-colors")}
-                    >
-                        Visit site
-                        <HugeiconsIcon icon={LinkSquare01Icon} size={14} />
-                    </a>
-                ) : (
-                    <span className={cn('text-xs text-muted-foreground italic')}>In development</span>
-                )}
-                {project.gitUrl && (
-                    <a
-                        href={project.gitUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={`Github - ${project.title}`}
-                        className={cn("text-sm font-medium self-start inline-flex items-center gap-1.5 border border-border rounded-full px-3 py-1 hover:bg-muted transition-colors")}
-                    >
-                        <HugeiconsIcon icon={Github01Icon} size={20}/> GitHub
-                    </a>
-                )}
+                    {project.caseStudyUrl && (
+                        <Link
+                            href={project.caseStudyUrl}
+                            aria-label={`Case study - ${project.title}`}
+                            className={cn("text-sm font-medium self-start inline-flex items-center gap-1.5 rounded-full px-3 py-1 bg-accent text-accent-foreground hover:bg-accent/80 transition-colors")}
+                        >
+                            Read case study →
+                        </Link>
+                    )}
+                    {project.liveUrl ? (
+                        <a
+                            href={project.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`Visit ${project.title}`}
+                            className={cn("text-sm font-medium self-start inline-flex items-center gap-1.5 border border-border rounded-full px-3 py-1 hover:bg-muted transition-colors")}
+                        >
+                            Visit site
+                            <HugeiconsIcon icon={LinkSquare01Icon} size={14} />
+                        </a>
+                    ) : (
+                        <span className={cn('text-xs text-muted-foreground italic')}>In development</span>
+                    )}
+                    {project.gitUrl && (
+                        <a
+                            href={project.gitUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`Github - ${project.title}`}
+                            className={cn("text-sm font-medium self-start inline-flex items-center gap-1.5 border border-border rounded-full px-3 py-1 hover:bg-muted transition-colors")}
+                        >
+                            <HugeiconsIcon icon={Github01Icon} size={20} /> GitHub
+                        </a>
+                    )}
                 </div>
             </div>
         </div>
     )
 }
 
-export function ProjectsList({ projects }: { projects: ProjectCardData[] }) {
+export function ProjectsList({ projects }: { projects: ProjectItem[] }) {
     const [showAll, setShowAll] = useState(false)
     const visible = showAll ? projects : projects.slice(0, 3);
 
@@ -77,7 +77,7 @@ export function ProjectsList({ projects }: { projects: ProjectCardData[] }) {
         <>
             <div className={cn('flex flex-col gap-5')}>
                 {visible.map(project => (
-                    <ProjectCard key={project._id} project={project} />
+                    <ProjectCard key={project.id} project={project} />
                 ))}
             </div>
             {projects.length > 3 && (
