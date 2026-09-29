@@ -6,46 +6,25 @@ import { ProjectsSection } from "@/components/sections/ProjectsSection";
 import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { PersonJsonLd } from "@/components/seo/PersonJsonLd";
-import { getHero, getAbout, getProjectsSettings, getProjects, getContact } from "@/sanity/lib/queries";
+import { heroContent } from "@/lib/data/hero";
+import { aboutContent } from "@/lib/data/about";
+import { projects, projectsHeading } from "@/lib/data/projects";
+import { contactHeading, PRIVACY_NOTICE } from "@/lib/data/contact";
 
-const QUERY_LABELS = ["hero", "about", "projectsSettings", "projects", "contact"] as const;
-
-export default async function Home() {
-  const results = await Promise.allSettled([
-    getHero(),
-    getAbout(),
-    getProjectsSettings(),
-    getProjects(),
-    getContact(),
-  ]);
-
-  results.forEach((result, index) => {
-    if (result.status === "rejected") {
-      console.error(`[sanity] Failed to fetch ${QUERY_LABELS[index]}:`, result.reason);
-    }
-  });
-
-  const [heroResult, aboutResult, projectsSettingsResult, projectsResult, contactResult] = results;
-
-  const hero = heroResult.status === "fulfilled" ? heroResult.value : null;
-  const about = aboutResult.status === "fulfilled" ? aboutResult.value : null;
-  const projectsSettings = projectsSettingsResult.status === "fulfilled" ? projectsSettingsResult.value : null;
-  const projects = projectsResult.status === "fulfilled" ? projectsResult.value : [];
-  const contact = contactResult.status === "fulfilled" ? contactResult.value : null;
-
+export default function Home() {
   return (
     <main id="main-content" tabIndex={-1} className="mx-auto max-w-4xl py-nav px-4 sm:px-6 lg:px-8">
       <PersonJsonLd />
-      {hero && <HeroSection content={hero} />}
-      {about && <AboutSection content={about} />}
+      <HeroSection content={heroContent} />
+      <AboutSection content={aboutContent} />
       <Separator />
       {/* <SkillsSection />
       <Separator /> */}
-      <ProjectsSection projects={projects} heading={projectsSettings?.heading ?? "Projects"} />
+      <ProjectsSection projects={projects} heading={projectsHeading} />
       <Separator />
       {/*<TestimonialsSection />
       <Separator/> */}
-      {contact && <ContactSection heading={contact.heading} privacyNotice={contact.privacyNotice} />}
+      <ContactSection heading={contactHeading} privacyNotice={PRIVACY_NOTICE} />
     </main>
   );
 }
