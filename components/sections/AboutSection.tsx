@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils"
 import { SECTION_IDS } from "@/lib/constants"
-import type { AboutContent } from "@/sanity/lib/types"
+import type { AboutContent } from "@/lib/data/about"
 
 export function AboutSection({ content }: { content: AboutContent }) {
     return (

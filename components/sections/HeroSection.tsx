@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button-variants";
 import { SECTION_IDS, CALENDLY_URL } from "@/lib/constants";
-import type { HeroContent } from "@/sanity/lib/types";
+import type { HeroContent } from "@/lib/data/hero";
 
 // xl on mobile (<640px), 2xl on sm+ — matches 2xl size definition
 const heroButtonSm = "sm:h-12 sm:gap-2 sm:px-7 sm:text-base";
