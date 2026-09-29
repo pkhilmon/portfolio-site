@@ -27,7 +27,7 @@ export const projects: ProjectItem[] = [
   {
     id: 'vn-photographer-portfolio-page',
     title: 'Photographer portfolio',
-    description: 'Photographer portfolio is a modern personal website that showcases professional experience, technical skills, and real-world web development projects in a clean and responsive layout. It highlights expertise in front-end development with Next.js, and TailwindCSS while making it easy for visitors to explore projects and connect for future opportunities.',
+    description: 'Website for a portrait and event photographer in the Essen, Düsseldorf and Münster area. Each service (portraits, families, couples, business, events) gets its own page with sample photos, alongside client testimonials and WhatsApp contact buttons throughout. Image-first, responsive layout built with Next.js and Tailwind CSS.',
     stack: ['Next.js', 'TypeScript', 'Tailwind CSS'],
     liveUrl: 'https://www.vladlena-fotografie.de',
     imageUrl: '/images/projects/vn-photo-portfolio.webp',
@@ -59,7 +59,7 @@ export const projects: ProjectItem[] = [
     stack: ['Phaser.io', 'TypeScript'],
     liveUrl: 'https://www.funnygames.org/game/bubble_burst.html',
     imageUrl: '/images/projects/bubble-burst.avif',
-    imageAlt: 'Bubble Burst HTML5 game screeshot',
+    imageAlt: 'Bubble Burst HTML5 game screenshot',
   },
   {
     id: 'jelly-madness-2-html5-game',
