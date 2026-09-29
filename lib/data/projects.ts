@@ -67,7 +67,7 @@ export const projects: ProjectItem[] = [
     description: 'Jelly Madness 2 is a fun match-3 puzzle game where you connect three or more colorful jellies to complete level goals and clear each stage. Make bigger combos to unlock powerful boosters and pop your way through a magical world full of sweet challenges!',
     stack: ['Phaser.io', 'TypeScript'],
     liveUrl: 'https://www.funnygames.org/game/jelly_madness_2.html',
-    imageUrl: '/images/projects/jelly-madness-2-.webp',
+    imageUrl: '/images/projects/jelly-madness-2.webp',
     imageAlt: 'Jelly Madness 2 HTML5 game screenshot',
   },
   {
