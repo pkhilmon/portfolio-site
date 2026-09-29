@@ -10,8 +10,10 @@ global.IntersectionObserver = jest.fn().mockImplementation((cb) => {
   return { observe: jest.fn(), unobserve: jest.fn(), disconnect: jest.fn() }
 })
 
+// Section links and the hamburger drawer are commented out in NavBar.tsx.
+// Un-skip these tests when they are restored.
 describe('NavBar', () => {
-  it('marks the intersecting section link as aria-current', () => {
+  it.skip('marks the intersecting section link as aria-current', () => {
     render(<NavBar />)
     // Simulate "skills" section entering viewport                                                     
     act(() => {
@@ -21,7 +23,7 @@ describe('NavBar', () => {
     expect(screen.getAllByRole('link', { name: /skills/i })[0]).toHaveAttribute('aria-current', 'page')
   })
 
-  it('only one link is aria-current at a time', () => {
+  it.skip('only one link is aria-current at a time', () => {
     render(<NavBar />)
     act(() => {
       observerCallback([{ isIntersecting: true, target: { id: SECTION_IDS.about } }] as unknown as IntersectionObserverEntry[], {} as IntersectionObserver)
@@ -36,7 +38,7 @@ describe('NavBar', () => {
     expect(screen.getByRole('navigation', { name: /primary navigation/i })).toBeInTheDocument()
   })
 
-  it('renders all section links from NAV_LINKS', () => {
+  it.skip('renders all section links from NAV_LINKS', () => {
     render(<NavBar />)
     NAV_LINKS.forEach((key) => {
       const id = SECTION_IDS[key]
@@ -45,7 +47,7 @@ describe('NavBar', () => {
     })
   })
 
-  it('each section link has correct href', () => {
+  it.skip('each section link has correct href', () => {
     render(<NavBar />)
     NAV_LINKS.forEach((key) => {
       const id = SECTION_IDS[key]
@@ -56,7 +58,7 @@ describe('NavBar', () => {
     })
   })
 
-  it('hamburger button opens the mobile drawer', () => {
+  it.skip('hamburger button opens the mobile drawer', () => {
     render(<NavBar />)
     const hamburger = screen.getByRole('button', { name: /open navigation menu/i })
     expect(hamburger).toBeInTheDocument()
@@ -64,7 +66,7 @@ describe('NavBar', () => {
     expect(screen.getByRole('dialog', { name: /navigation menu/i })).toBeInTheDocument()
   })
 
-  it('closes drawer on Escape and returns focus to hamburger', () => {
+  it.skip('closes drawer on Escape and returns focus to hamburger', () => {
     render(<NavBar />)
     const hamburger = screen.getByRole('button', { name: /open navigation menu/i })
     fireEvent.click(hamburger)
@@ -75,7 +77,7 @@ describe('NavBar', () => {
     expect(document.activeElement).toBe(hamburger)
   })
 
-  it('closes drawer when clicking outside (backdrop)', () => {
+  it.skip('closes drawer when clicking outside (backdrop)', () => {
     render(<NavBar />)
     fireEvent.click(screen.getByRole('button', { name: /open navigation menu/i }))
     const backdrop = document.querySelector('[aria-hidden="true"]') as Element
@@ -83,7 +85,7 @@ describe('NavBar', () => {
     expect(screen.queryByRole('dialog', { name: /navigation menu/i })).not.toBeInTheDocument()
   })
 
-  it('closes drawer and returns focus when a nav link is tapped', () => {
+  it.skip('closes drawer and returns focus when a nav link is tapped', () => {
     render(<NavBar />)
     const hamburger = screen.getByRole('button', { name: /open navigation menu/i })
     fireEvent.click(hamburger)

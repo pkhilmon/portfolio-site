@@ -27,11 +27,11 @@ describe('Footer', () => {
     })
   })
 
-  it('renders ↗ suffix on each social link', () => {
+  it('renders an external-link icon on each social link', () => {
     render(<Footer />)
     SOCIAL_LINKS.forEach(({ label }) => {
       const link = screen.getByRole('link', { name: new RegExp(label, 'i') })
-      expect(link.textContent).toContain('↗')
+      expect(link.querySelector('svg')).toBeInTheDocument()
     })
   })
 
