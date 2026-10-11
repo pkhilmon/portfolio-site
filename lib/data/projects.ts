@@ -27,11 +27,12 @@ export const projects: ProjectItem[] = [
   {
     id: 'vn-photographer-portfolio-page',
     title: 'Photographer portfolio',
-    description: 'Website for a portrait and event photographer in the Essen, Düsseldorf and Münster area. Each service (portraits, families, couples, business, events) gets its own page with sample photos, alongside client testimonials and WhatsApp contact buttons throughout. Image-first, responsive layout built with Next.js and Tailwind CSS.',
-    stack: ['Next.js', 'TypeScript', 'Tailwind CSS'],
+    description: 'Mobile-first website for a portrait and family photographer in the Essen, Düsseldorf and Münster area. Six services, each introduced by one of her photos, with a WhatsApp button on every photo that opens a message written for that service, a fixed enquiry bar and client testimonials. No cookies, so no consent banner.',
+    stack: ['Next.js 16', 'React 19', 'TypeScript', 'Tailwind 4'],
     liveUrl: 'https://www.vladlena-fotografie.de',
-    imageUrl: '/images/projects/vn-photo-portfolio.webp',
-    imageAlt: 'VN photographer portfolio screenshot',
+    caseStudyUrl: '/work/vladlena-fotografie',
+    imageUrl: '/images/work/vladlena-fotografie/card.webp',
+    imageAlt: 'First screen of the photographer’s website: a portrait, her name and a gold WhatsApp enquiry bar',
   },
   {
     id: 'my-portfolio-landing-page',
