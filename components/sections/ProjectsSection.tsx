@@ -3,7 +3,7 @@ import { SECTION_IDS } from "@/lib/constants";
 import { ProjectsList } from "./ProjectsList";
 import type { ProjectItem } from "@/lib/data/projects";
 
-export function ProjectsSection({ projects, heading }: { projects: ProjectItem[], heading: string }) {
+export function ProjectsSection({ projects, heading, disclaimer }: { projects: ProjectItem[], heading: string, disclaimer: string }) {
     return (
         <section id={SECTION_IDS.projects} className={cn("scroll-mt-nav py-12 md:py-20 px-6")}>
             <h2 className={cn("mb-6 text-3xl font-semibold")}>
@@ -14,6 +14,7 @@ export function ProjectsSection({ projects, heading }: { projects: ProjectItem[]
             ) : (
                 <p className={cn('text-sm text-muted-foreground')}>No projects yet.</p>
             )}
+            <p className={cn("mt-6 text-sm text-muted-foreground")}>{disclaimer}</p>
         </section>
     )
 }
