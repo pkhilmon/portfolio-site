@@ -8,7 +8,7 @@ import { ContactSection } from "@/components/sections/ContactSection";
 import { PersonJsonLd } from "@/components/seo/PersonJsonLd";
 import { heroContent } from "@/lib/data/hero";
 import { aboutContent } from "@/lib/data/about";
-import { projects, projectsHeading } from "@/lib/data/projects";
+import { projects, projectsDisclaimer, projectsHeading } from "@/lib/data/projects";
 import { contactHeading, PRIVACY_NOTICE } from "@/lib/data/contact";
 
 export default function Home() {
@@ -16,11 +16,11 @@ export default function Home() {
     <main id="main-content" tabIndex={-1} className="mx-auto max-w-4xl py-nav px-4 sm:px-6 lg:px-8">
       <PersonJsonLd />
       <HeroSection content={heroContent} />
-      <AboutSection content={aboutContent} />
+      <ProjectsSection projects={projects} heading={projectsHeading} disclaimer={projectsDisclaimer} />
       <Separator />
       {/* <SkillsSection />
       <Separator /> */}
-      <ProjectsSection projects={projects} heading={projectsHeading} />
+      <AboutSection content={aboutContent} />
       <Separator />
       {/*<TestimonialsSection />
       <Separator/> */}
