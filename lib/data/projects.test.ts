@@ -19,4 +19,11 @@ describe('projects data', () => {
             expect(url).toMatch(/^https?:\/\//)
         }
     })
+
+    it('contains no game entries', () => {
+        for (const project of projects) {
+            expect(project.stack).not.toContain('Phaser.io')
+            expect(project.liveUrl ?? '').not.toContain('funnygames.org')
+        }
+    })
 })

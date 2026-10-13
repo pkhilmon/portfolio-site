@@ -9,15 +9,32 @@ describe('AboutSection', () => {
         expect(screen.getByRole('heading', { level: 2})).toBeInTheDocument()
     })
 
-    it('renders multiple paragraphs', () => {
+    it('renders exactly 2 paragraphs', () => {
         const { container } = render(<AboutSection content={aboutContent} />)
-        // each paragraph maps to a <p> element
-        expect(container.querySelectorAll('p').length).toBeGreaterThanOrEqual(3)
+        expect(container.querySelectorAll('p')).toHaveLength(2)
     })
 
-    it('renders first paragraph from aboutContent', () => {
+    it('renders the main paragraph from aboutContent', () => {
         render(<AboutSection content={aboutContent} />)
-        expect(screen.getByText(aboutContent.paragraphs[0])).toBeInTheDocument()
+        expect(screen.getByText(aboutContent.paragraph)).toBeInTheDocument()
+    })
+
+    it('links every game in a new tab from the second paragraph', () => {
+        const { container } = render(<AboutSection content={aboutContent} />)
+        const links = Array.from(container.querySelectorAll('p')[1].querySelectorAll('a'))
+        expect(links).toHaveLength(4)
+        expect(links.map(a => a.getAttribute('href'))).toEqual(aboutContent.games.links.map(l => l.url))
+        links.forEach(link => {
+            expect(link).toHaveAttribute('target', '_blank')
+            expect(link).toHaveAttribute('rel', 'noopener noreferrer')
+        })
+    })
+
+    it('joins the game links as "A, B, C and D."', () => {
+        const { container } = render(<AboutSection content={aboutContent} />)
+        expect(container.querySelectorAll('p')[1].textContent).toBe(
+            'Before web, I shipped HTML5 games that are still playable: Bubble Burst, Jelly Madness, Jelly Madness 2 and Jewel Burst.'
+        )
     })
 
     it('section has the correct id for scroll-spy', () => {

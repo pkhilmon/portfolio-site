@@ -6,7 +6,7 @@ import { ProjectsSection } from '@/components/sections/ProjectsSection'
 import { ContactSection } from '@/components/sections/ContactSection'
 import { heroContent } from '@/lib/data/hero'
 import { aboutContent } from '@/lib/data/about'
-import { projects, projectsHeading } from '@/lib/data/projects'
+import { projects, projectsDisclaimer, projectsHeading } from '@/lib/data/projects'
 import { contactHeading, PRIVACY_NOTICE } from '@/lib/data/contact'
 
 jest.mock('@/components/sections/HeroSection', () => ({ HeroSection: jest.fn(() => null) }))
@@ -27,7 +27,14 @@ describe('Home', () => {
     render(<Home />)
     expect(propsOf(HeroSection)).toEqual({ content: heroContent })
     expect(propsOf(AboutSection)).toEqual({ content: aboutContent })
-    expect(propsOf(ProjectsSection)).toEqual({ projects, heading: projectsHeading })
+    expect(propsOf(ProjectsSection)).toEqual({ projects, heading: projectsHeading, disclaimer: projectsDisclaimer })
     expect(propsOf(ContactSection)).toEqual({ heading: contactHeading, privacyNotice: PRIVACY_NOTICE })
+  })
+
+  // Sections are mocked, so render order is read from the mocks instead of the DOM
+  it('renders Work before About', () => {
+    render(<Home />)
+    const order = (component: unknown) => (component as jest.Mock).mock.invocationCallOrder[0]
+    expect(order(ProjectsSection)).toBeLessThan(order(AboutSection))
   })
 })
