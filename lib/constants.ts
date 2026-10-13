@@ -8,6 +8,14 @@ export const SECTION_IDS = {
 } as const;
 
 export const NAV_LINKS = ["about", "skills", "projects", "contact"] as const satisfies ReadonlyArray<keyof typeof SECTION_IDS>;
+export const NAV_LABELS = {
+    hero: "Home",
+    about: "About",
+    skills: "Skills",
+    projects: "Work",
+    testimonials: "Testimonials",
+    contact: "Contact",
+} as const satisfies Record<keyof typeof SECTION_IDS, string>;
 
 export const HEADER_TITLE = "Pavlo Khilmon" as const;
 export const JOB_TITLE = "Frontend Developer" as const;
