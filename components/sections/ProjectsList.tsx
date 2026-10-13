@@ -19,7 +19,10 @@ function ProjectCard({ project }: { project: ProjectItem }) {
                 />
             </div>
             <div className={cn('flex flex-col flex-1 gap-3 p-4')}>
-                <h3 className={cn("text-base font-semibold")}>{project.title}</h3>
+                <div className={cn("flex flex-wrap items-center gap-2")}>
+                    <h3 className={cn("text-base font-semibold")}>{project.title}</h3>
+                    <Badge variant="outline">{project.label}</Badge>
+                </div>
                 <p className={cn("text-sm text-muted-foreground flex-1")}>{project.description}</p>
                 <ul className={cn("flex flex-wrap gap-1.5")}>
                     {project.stack.map(tech => (
