@@ -1,5 +1,5 @@
 import { SECTION_IDS } from "@/lib/constants";
-import { WhyMeContent } from "@/lib/data/process";
+import type { WhyMeContent } from "@/lib/data/process";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { Fragment } from "react";
@@ -25,13 +25,13 @@ export function WhyMeSection({ content }: { content: WhyMeContent }) {
                                     {i === 0 ? " " : " and "}
                                     <Link
                                         href={link.href}
-                                        className={cn("inline-flex items-center min-h-11 font-medium text-accent underline-offset-4 hover:underline rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent")}
+                                        className={cn("inline-block py-3 -my-3 font-medium text-accent underline-offset-4 hover:underline rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent")}
                                     >
                                         {link.label}
                                     </Link>
                                 </Fragment>
                             ))}
-                            {point.links && "."}
+                            {point.links?.length ? "." : null}
                         </p>
                     </li>
                 ))}

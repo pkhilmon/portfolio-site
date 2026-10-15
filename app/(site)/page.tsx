@@ -4,6 +4,8 @@ import { ServicesSection } from "@/components/sections/ServicesSection";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { SkillsSection } from "@/components/sections/SkillsSection";
 import { ProjectsSection } from "@/components/sections/ProjectsSection";
+import { ProcessSection } from "@/components/sections/ProcessSection";
+import { WhyMeSection } from "@/components/sections/WhyMeSection";
 import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { PersonJsonLd } from "@/components/seo/PersonJsonLd";
@@ -11,10 +13,8 @@ import { heroContent } from "@/lib/data/hero";
 import { servicesContent } from "@/lib/data/services";
 import { aboutContent } from "@/lib/data/about";
 import { projects, projectsDisclaimer, projectsHeading } from "@/lib/data/projects";
-import { contactHeading, PRIVACY_NOTICE } from "@/lib/data/contact";
-import { ProcessSection } from "@/components/sections/ProcessSection";
 import { processContent, whyMeContent } from "@/lib/data/process";
-import { WhyMeSection } from "@/components/sections/WhyMeSection";
+import { contactHeading, PRIVACY_NOTICE } from "@/lib/data/contact";
 
 export default function Home() {
   return (

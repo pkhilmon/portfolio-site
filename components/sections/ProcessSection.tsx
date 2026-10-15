@@ -1,5 +1,5 @@
 import { SECTION_IDS } from "@/lib/constants";
-import { ProcessContent } from "@/lib/data/process";
+import type { ProcessContent } from "@/lib/data/process";
 import { cn } from "@/lib/utils";
 
 export function ProcessSection({ content }: { content: ProcessContent }) {
