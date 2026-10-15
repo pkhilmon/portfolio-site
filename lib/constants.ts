@@ -1,5 +1,6 @@
 export const SECTION_IDS = {
     hero: "hero",
+    services: "services",
     about: "about",
     skills: "skills",
     projects: "projects",
@@ -7,9 +8,10 @@ export const SECTION_IDS = {
     contact: "contact",
 } as const;
 
-export const NAV_LINKS = ["about", "skills", "projects", "contact"] as const satisfies ReadonlyArray<keyof typeof SECTION_IDS>;
+export const NAV_LINKS = ["services", "projects", "about", "contact"] as const satisfies ReadonlyArray<keyof typeof SECTION_IDS>;
 export const NAV_LABELS = {
     hero: "Home",
+    services: "Services",
     about: "About",
     skills: "Skills",
     projects: "Work",

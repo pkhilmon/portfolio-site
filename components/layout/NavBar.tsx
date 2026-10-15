@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { useEffect, useState, useRef, useCallback } from "react"
-import { SECTION_IDS, NAV_LINKS, SOCIAL_LINKS, HEADER_TITLE } from "@/lib/constants"
+import { SECTION_IDS, NAV_LINKS, NAV_LABELS, SOCIAL_LINKS, HEADER_TITLE } from "@/lib/constants"
 import { HugeiconsIcon } from "@hugeicons/react";
 import { LinkSquare01Icon } from "@hugeicons/core-free-icons";
 import { QRCodeButton } from "../ui/QRCodeButton";
@@ -163,7 +163,7 @@ export function NavBar() {
                     </Link>
 
                     {/* Desktop links */}
-                    {/* <ul className="hidden md:flex items-center gap-6 text-sm">
+                    <ul className="hidden md:flex items-center gap-6 text-sm">
                         {NAV_LINKS.map((key) => {
                             const id = SECTION_IDS[key];
                             const isActive = activeId === id;
@@ -171,18 +171,17 @@ export function NavBar() {
                                 <li key={key}>
                                     <a href={`#${id}`}
                                         aria-current={isActive ? "page" : undefined}
-                                        className={cn("capitalize transition-colors rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent",
+                                        className={cn("transition-colors rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent",
                                             isActive
                                                 ? "text-accent font-medium"
                                                 : "text-muted-foreground hover:text-foreground"
                                         )}>
-                                        {id}
+                                        {NAV_LABELS[key]}
                                     </a>
                                 </li>
                             )
-                        }
-                        )}
-                    </ul> */}
+                        })}
+                    </ul>
 
                     {/* Desktop CV download link */}
                     <QRCodeButton className={cn("hidden md:flex h-9 w-9")} />
@@ -190,7 +189,7 @@ export function NavBar() {
                     {/* Hamburger mobile only */}
                     <div className={cn("md:hidden flex gap-0")}>
                         <QRCodeButton className={cn("items-center justify-center h-nav w-11 text-muted-foreground")} />
-                        {/* <button
+                        <button
                             ref={hamburgerRef}
                             onClick={() => setDrawerOpen(true)}
                             aria-label="open navigation menu"
@@ -201,7 +200,7 @@ export function NavBar() {
                             <span className={cn("block h-px w-5 bg-current transition-all duration-300", drawerOpen && "translate-y-2 rotate-45")} />
                             <span className={cn("block h-px w-5 bg-current transition-all duration-300", drawerOpen && "opacity-0")} />
                             <span className={cn("block h-px w-5 bg-current transition-all duration-300", drawerOpen && "-translate-y-2 rotate-45")} />
-                        </button> */}
+                        </button>
                     </div>
                 </nav>
             </header>
@@ -239,31 +238,32 @@ export function NavBar() {
                 >x</button>
 
                 {/* Section links - min 44x44px tap targets */}
-                {/* <nav aria-label="Mobile navigation">
+                <nav aria-label="Mobile navigation">
                     <ul className={cn("flex flex-col gap-1")}>
-                        {NAV_LINKS.map((id) => {
-                            const key = SECTION_IDS[id];
+                        {NAV_LINKS.map((key) => {
+                            const id = SECTION_IDS[key];
+                            const isActive = activeId === id;
                             return (
                                 <li key={key}>
                                     <a
                                         href={`#${id}`}
                                         onClick={closeDrawer}
-                                        aria-current={activeId === id ? "page" : undefined}
+                                        aria-current={isActive ? "page" : undefined}
                                         className={cn(
-                                            "flex items-center capitalize min-h-11 px-3 rounded text-base transition-colors",
-                                            "rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent",
-                                            activeId === id
+                                            "flex items-center min-h-11 px-3 rounded text-base transition-colors",
+                                            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent",
+                                            isActive
                                                 ? "text-accent font-medium bg-accent/10"
                                                 : "text-muted-foreground hover:text-accent hover:bg-accent/10"
                                         )}
                                     >
-                                        {id}
+                                        {NAV_LABELS[key]}
                                     </a>
                                 </li>
                             )
                         })}
                     </ul>
-                </nav> */}
+                </nav>
 
                 {/* Social links at the bottom */}
                 <div className={cn("mt-auto flex gap-4 text-sm text-muted-foreground")}>
