@@ -25,7 +25,7 @@ export const servicesContent: ServicesContent = {
         audience: "For:",
         exclusions: "Not included:",
         timeline: "Timeline:",
-        quoteLink: "Fixed price · Get a quote",
+        quoteLink: "Get a quote",
     },
     items: [
         {

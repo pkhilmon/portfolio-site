@@ -9,7 +9,7 @@ export function AboutSection({ content }: { content: AboutContent }) {
             <h2 className={cn("px-6 md:px-0 mb-6 text-3xl font-semibold")}>
                 {content.heading}
             </h2>
-            <div className={cn("space-y-4")}>
+            <div className={cn("px-6 md:px-0 space-y-4")}>
                 <p className={cn("text-base font-normal leading-relaxed text-foreground")}>
                     {content.paragraph}
                 </p>

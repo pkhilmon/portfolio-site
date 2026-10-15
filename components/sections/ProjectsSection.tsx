@@ -12,9 +12,9 @@ export function ProjectsSection({ projects, heading, disclaimer }: { projects: P
             {projects.length > 0 ? (
                 <ProjectsList projects={projects} />
             ) : (
-                <p className={cn('text-sm text-muted-foreground')}>No projects yet.</p>
+                <p className={cn('px-6 md:px-0 text-sm text-muted-foreground')}>No projects yet.</p>
             )}
-            <p className={cn("mt-6 text-sm text-muted-foreground")}>{disclaimer}</p>
+            <p className={cn("mt-6 px-6 md:px-0 text-sm text-muted-foreground")}>{disclaimer}</p>
         </section>
     )
 }

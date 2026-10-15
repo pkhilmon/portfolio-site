@@ -23,7 +23,7 @@ export function ServicesSection({ content }: { content: ServicesContent }) {
                         className={cn("grid gap-3 p-4 md:p-6 md:grid-cols-[5fr_7fr] md:gap-x-10 bg-card text-card-foreground ring-1 ring-foreground/10 rounded-lg")}
                     >
                         <div className={cn("flex flex-col gap-3")}>
-                            <h3 className={cn("text-base md:text-lg font-semibold")}>{service.title}</h3>
+                            <h3 id={`service-${service.id}`} className={cn("text-base md:text-lg font-semibold")}>{service.title}</h3>
                             <p className={cn("text-sm text-muted-foreground")}>
                                 <span className={cn("font-medium")}>{labels.timeline}</span> {service.timeline}
                             </p>
@@ -43,6 +43,8 @@ export function ServicesSection({ content }: { content: ServicesContent }) {
                         </div>
                         <a
                             href={`#${SECTION_IDS.contact}`}
+                            // The three links share one label, so screen readers also announce the service
+                            aria-describedby={`service-${service.id}`}
                             className={cn("justify-self-start md:self-end inline-flex items-center min-h-11 text-sm font-medium text-accent underline-offset-4 hover:underline rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent")}
                         >
                             {labels.quoteLink}

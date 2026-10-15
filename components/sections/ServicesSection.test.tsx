@@ -58,8 +58,10 @@ describe('ServicesSection', () => {
         getCards().forEach(card => {
             const links = within(card).getAllByRole('link')
             expect(links).toHaveLength(1)
-            expect(links[0]).toHaveAccessibleName('Fixed price · Get a quote')
+            expect(links[0]).toHaveAccessibleName('Get a quote')
             expect(links[0]).toHaveAttribute('href', `#${SECTION_IDS.contact}`)
+            // Same name on every card, so the description tells them apart
+            expect(links[0]).toHaveAccessibleDescription(within(card).getByRole('heading', { level: 3 }).textContent!)
         })
     })
 

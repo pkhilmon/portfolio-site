@@ -94,6 +94,29 @@ describe('NavBar', () => {
     })
   })
 
+  it('re-activates scroll-spy after navigating back to the home page', () => {
+    mockPathname = '/work/dlrg-24h-schwimmen'
+    const { rerender } = render(<NavBar />)
+
+    // The home page sections only exist after navigating to /
+    const services = document.createElement('section')
+    services.id = SECTION_IDS.services
+    document.body.appendChild(services)
+    const observerMock = global.IntersectionObserver as jest.Mock
+    const observersBefore = observerMock.mock.results.length
+
+    mockPathname = '/'
+    rerender(<NavBar />)
+    const observed = observerMock.mock.results.slice(observersBefore).flatMap((r) => r.value.observe.mock.calls.map((c: unknown[]) => c[0]))
+    expect(observed).toContain(services)
+
+    act(() => {
+      observerCallback([{ isIntersecting: true, target: services }] as unknown as IntersectionObserverEntry[], {} as IntersectionObserver)
+    })
+    expect(screen.getAllByRole('link', { name: 'Services' })[0]).toHaveAttribute('aria-current', 'page')
+    services.remove()
+  })
+
   it('hamburger button opens the mobile drawer', () => {
     render(<NavBar />)
     const hamburger = screen.getByRole('button', { name: /open navigation menu/i })
