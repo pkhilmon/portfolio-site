@@ -7,10 +7,11 @@ export const SECTION_IDS = {
     skills: "skills",
     projects: "projects",
     testimonials: "testimonials",
+    faq: "faq",
     contact: "contact",
 } as const;
 
-export const NAV_LINKS = ["services", "projects", "process", "about", "contact"] as const satisfies ReadonlyArray<keyof typeof SECTION_IDS>;
+export const NAV_LINKS = ["services", "projects", "process", "about", "faq", "contact"] as const satisfies ReadonlyArray<keyof typeof SECTION_IDS>;
 export const NAV_LABELS = {
     hero: "Home",
     services: "Services",
@@ -20,6 +21,7 @@ export const NAV_LABELS = {
     skills: "Skills",
     projects: "Work",
     testimonials: "Testimonials",
+    faq: "FAQ",
     contact: "Contact",
 } as const satisfies Record<keyof typeof SECTION_IDS, string>;
 
@@ -38,6 +40,6 @@ type SocialLink = {
 
 export const SOCIAL_LINKS: readonly SocialLink[] = [
     { href: "https://www.linkedin.com/in/pavlo-khilmon-260335131", label: "LinkedIn" },
-    // { href: "https://github.com/pkhilmon", label: "GitHub" },
+    { href: "https://github.com/pkhilmon", label: "GitHub" },
     { href: "https://www.upwork.com/freelancers/~01fda2e07bc1fa016b", label: "Upwork" },
 ];
