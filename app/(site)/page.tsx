@@ -12,6 +12,9 @@ import { servicesContent } from "@/lib/data/services";
 import { aboutContent } from "@/lib/data/about";
 import { projects, projectsDisclaimer, projectsHeading } from "@/lib/data/projects";
 import { contactHeading, PRIVACY_NOTICE } from "@/lib/data/contact";
+import { ProcessSection } from "@/components/sections/ProcessSection";
+import { processContent, whyMeContent } from "@/lib/data/process";
+import { WhyMeSection } from "@/components/sections/WhyMeSection";
 
 export default function Home() {
   return (
@@ -21,6 +24,10 @@ export default function Home() {
       <ServicesSection content={servicesContent} />
       <Separator />
       <ProjectsSection projects={projects} heading={projectsHeading} disclaimer={projectsDisclaimer} />
+      <Separator />
+      <ProcessSection content={processContent} />
+      <Separator />
+      <WhyMeSection content={whyMeContent} />
       <Separator />
       {/* <SkillsSection />
       <Separator /> */}
