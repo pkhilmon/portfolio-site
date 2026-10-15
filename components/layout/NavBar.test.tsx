@@ -10,7 +10,15 @@ global.IntersectionObserver = jest.fn().mockImplementation((cb) => {
   return { observe: jest.fn(), unobserve: jest.fn(), disconnect: jest.fn() }
 })
 
+// NavBar lives in the shared layout, so tests switch the current page here
+let mockPathname = '/'
+jest.mock('next/navigation', () => ({ usePathname: () => mockPathname }))
+
 describe('NavBar', () => {
+  beforeEach(() => {
+    mockPathname = '/'
+  })
+
   it('marks the intersecting section link as aria-current', () => {
     render(<NavBar />)
     // Simulate "services" section entering viewport
@@ -60,6 +68,29 @@ describe('NavBar', () => {
       links.forEach((link) => {
         expect(link).toHaveAttribute('href', `#${SECTION_IDS[key]}`)
       })
+    })
+  })
+
+  it('links back to the home page sections from other pages', () => {
+    mockPathname = '/work/dlrg-24h-schwimmen'
+    render(<NavBar />)
+    NAV_LINKS.forEach((key) => {
+      screen.getAllByRole('link', { name: NAV_LABELS[key] }).forEach((link) => {
+        expect(link).toHaveAttribute('href', `/#${SECTION_IDS[key]}`)
+      })
+    })
+  })
+
+  it('clears the active link when the page changes', () => {
+    const { rerender } = render(<NavBar />)
+    act(() => {
+      observerCallback([{ isIntersecting: true, target: { id: SECTION_IDS.services } }] as unknown as IntersectionObserverEntry[], {} as IntersectionObserver)
+    })
+    expect(screen.getAllByRole('link', { name: 'Services' })[0]).toHaveAttribute('aria-current', 'page')
+    mockPathname = '/work/dlrg-24h-schwimmen'
+    rerender(<NavBar />)
+    screen.getAllByRole('link', { name: 'Services' }).forEach((link) => {
+      expect(link).not.toHaveAttribute('aria-current')
     })
   })
 

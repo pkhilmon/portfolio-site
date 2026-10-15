@@ -11,13 +11,17 @@ import { QRCodeButton } from "../ui/QRCodeButton";
 
 
 export function NavBar() {
-    const [activeId, setActiveId] = useState<string>("")
+    const [active, setActive] = useState<{ id: string; pathname: string | null }>({ id: "", pathname: null })
     const [scrolled, setScrolled] = useState<boolean>(false)
     const [drawerOpen, setDrawerOpen] = useState<boolean>(false)
     const [heroInView, setHeroInView] = useState<boolean>(true)
     const pathname = usePathname()
     // Only the home page has a hero; every other page shows the name from the start
     const hideTitle = pathname === "/" && heroInView
+    // Sections only exist on the home page, so other pages link back to them
+    const sectionHref = (id: string) => (pathname === "/" ? `#${id}` : `/#${id}`)
+    // A highlight only counts on the page where it was set, so it doesn't carry over after navigation
+    const activeId = active.pathname === pathname ? active.id : ""
 
     const drawerRef = useRef<HTMLDivElement>(null)
     const hamburgerRef = useRef<HTMLButtonElement>(null)
@@ -35,7 +39,7 @@ export function NavBar() {
         const observer = new IntersectionObserver(
             (entries) => {
                 const visible = entries.find((e) => e.isIntersecting);
-                if (visible) setActiveId(visible.target.id);
+                if (visible) setActive({ id: visible.target.id, pathname });
             },
             {
                 rootMargin: "-40% 0px -55% 0px", // trigger when secrion hits middle of the screen
@@ -49,7 +53,7 @@ export function NavBar() {
         })
 
         return () => observer.disconnect()
-    }, [])
+    }, [pathname]) // re-observe the sections after client navigation back to /
 
     // hide/show nav name based on hero section visibility
     useEffect(() => {
@@ -169,7 +173,7 @@ export function NavBar() {
                             const isActive = activeId === id;
                             return (
                                 <li key={key}>
-                                    <a href={`#${id}`}
+                                    <a href={sectionHref(id)}
                                         aria-current={isActive ? "page" : undefined}
                                         className={cn("transition-colors rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent",
                                             isActive
@@ -246,7 +250,7 @@ export function NavBar() {
                             return (
                                 <li key={key}>
                                     <a
-                                        href={`#${id}`}
+                                        href={sectionHref(id)}
                                         onClick={closeDrawer}
                                         aria-current={isActive ? "page" : undefined}
                                         className={cn(
