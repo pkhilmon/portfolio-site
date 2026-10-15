@@ -46,11 +46,29 @@ describe('NavBar', () => {
     expect(screen.getByRole('navigation', { name: /primary navigation/i })).toBeInTheDocument()
   })
 
-  it('shows Services · Work · About · Contact in that order', () => {
+  it('shows Services · Work · Process · About · Contact in that order', () => {
     render(<NavBar />)
     const primary = screen.getByRole('navigation', { name: /primary navigation/i })
     const labels = within(primary).getAllByRole('listitem').map((li) => li.textContent)
-    expect(labels).toEqual(['Services', 'Work', 'About', 'Contact'])
+    expect(labels).toEqual(['Services', 'Work', 'Process', 'About', 'Contact'])
+  })
+
+  it('marks the Process link as aria-current when How it works intersects', () => {
+    render(<NavBar />)
+    act(() => {
+      observerCallback([{ isIntersecting: true, target: { id: SECTION_IDS.process } }] as unknown as IntersectionObserverEntry[], {} as IntersectionObserver)
+    })
+    const processLink = screen.getAllByRole('link', { name: 'Process' })[0]
+    expect(processLink).toHaveAttribute('href', '#process')
+    expect(processLink).toHaveAttribute('aria-current', 'page')
+  })
+
+  it('clears the highlight while Why me is in view (no nav link for it)', () => {
+    render(<NavBar />)
+    act(() => {
+      observerCallback([{ isIntersecting: true, target: { id: SECTION_IDS.whyMe } }] as unknown as IntersectionObserverEntry[], {} as IntersectionObserver)
+    })
+    expect(screen.queryAllByRole('link', { current: 'page' })).toHaveLength(0)
   })
 
   it('renders all section links from NAV_LINKS', () => {
