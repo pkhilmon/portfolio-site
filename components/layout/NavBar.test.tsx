@@ -46,11 +46,21 @@ describe('NavBar', () => {
     expect(screen.getByRole('navigation', { name: /primary navigation/i })).toBeInTheDocument()
   })
 
-  it('shows Services · Work · Process · About · Contact in that order', () => {
+  it('shows Services · Work · Process · About · FAQ · Contact in that order', () => {
     render(<NavBar />)
     const primary = screen.getByRole('navigation', { name: /primary navigation/i })
     const labels = within(primary).getAllByRole('listitem').map((li) => li.textContent)
-    expect(labels).toEqual(['Services', 'Work', 'Process', 'About', 'Contact'])
+    expect(labels).toEqual(['Services', 'Work', 'Process', 'About', 'FAQ', 'Contact'])
+  })
+
+  it('marks the FAQ link as aria-current when the FAQ section intersects', () => {
+    render(<NavBar />)
+    act(() => {
+      observerCallback([{ isIntersecting: true, target: { id: SECTION_IDS.faq } }] as unknown as IntersectionObserverEntry[], {} as IntersectionObserver)
+    })
+    const faqLink = screen.getAllByRole('link', { name: 'FAQ' })[0]
+    expect(faqLink).toHaveAttribute('href', '#faq')
+    expect(faqLink).toHaveAttribute('aria-current', 'page')
   })
 
   it('marks the Process link as aria-current when How it works intersects', () => {
