@@ -11,8 +11,8 @@ function joinList(items: string[]) {
 export function ServicesSection({ content }: { content: ServicesContent }) {
     const { labels } = content
     return (
-        <section id={SECTION_IDS.services} className={cn("scroll-mt-nav py-12 md:py-20 px-6")}>
-            <h2 className={cn("mb-6 text-3xl font-semibold")}>
+        <section id={SECTION_IDS.services} className={cn("scroll-mt-nav py-12 md:py-20 px-0 md:px-6")}>
+            <h2 className={cn("px-6 md:px-0 mb-6 text-3xl font-semibold")}>
                 {content.heading}
             </h2>
             <ul className={cn("grid gap-5 lg:grid-cols-3")}>

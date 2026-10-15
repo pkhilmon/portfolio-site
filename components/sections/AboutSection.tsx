@@ -5,8 +5,8 @@ import { Fragment } from "react"
 
 export function AboutSection({ content }: { content: AboutContent }) {
     return (
-        <section id={SECTION_IDS.about} className={cn("scroll-mt-nav py-12 md:py-20 px-6")}>
-            <h2 className={cn("mb-6 text-3xl font-semibold")}>
+        <section id={SECTION_IDS.about} className={cn("scroll-mt-nav py-12 md:py-20 px-0 md:px-6")}>
+            <h2 className={cn("px-6 md:px-0 mb-6 text-3xl font-semibold")}>
                 {content.heading}
             </h2>
             <div className={cn("space-y-4")}>

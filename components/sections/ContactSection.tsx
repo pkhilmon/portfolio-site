@@ -8,9 +8,9 @@ import { LinkSquare01Icon } from "@hugeicons/core-free-icons";
 
 export function ContactSection({ heading, privacyNotice }: { heading: string, privacyNotice: string }) {
     return (
-        <section id={SECTION_IDS.contact} className={cn("scroll-mt-nav py-12 md:py-20 px-6")}>
+        <section id={SECTION_IDS.contact} className={cn("scroll-mt-nav py-12 md:py-20 px-0 md:px-6")}>
             <div className={cn("flex flex-col gap-8")}>
-                <h2 className={cn("text-3xl font-semibold leading-tight")}>
+                <h2 className={cn("px-6 md:px-0 text-3xl font-semibold leading-tight")}>
                     {heading}
                 </h2>
                 <ContactForm />
