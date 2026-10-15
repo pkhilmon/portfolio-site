@@ -57,10 +57,11 @@ describe('WhyMeSection', () => {
         )
     })
 
-    it('proof links have a 44px tap target', () => {
+    // 20px text-sm line + py-3 = 44px hit area; -my-3 keeps the sentence's line height unchanged
+    it('proof links have a 44px tap target without stretching the line', () => {
         renderSection()
         within(getCards()[3]).getAllByRole('link').forEach(link => {
-            expect(link).toHaveClass('min-h-11')
+            expect(link).toHaveClass('inline-block', 'py-3', '-my-3')
         })
     })
 

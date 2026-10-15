@@ -63,8 +63,13 @@ describe('NavBar', () => {
     expect(processLink).toHaveAttribute('aria-current', 'page')
   })
 
-  it('clears the highlight while Why me is in view (no nav link for it)', () => {
+  it('clears the Process highlight when scrolling on into Why me (no nav link for it)', () => {
     render(<NavBar />)
+    // Activate Process first, otherwise "no current link" holds before Why me is ever observed
+    act(() => {
+      observerCallback([{ isIntersecting: true, target: { id: SECTION_IDS.process } }] as unknown as IntersectionObserverEntry[], {} as IntersectionObserver)
+    })
+    expect(screen.getAllByRole('link', { name: 'Process' })[0]).toHaveAttribute('aria-current', 'page')
     act(() => {
       observerCallback([{ isIntersecting: true, target: { id: SECTION_IDS.whyMe } }] as unknown as IntersectionObserverEntry[], {} as IntersectionObserver)
     })
