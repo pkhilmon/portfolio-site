@@ -1,7 +1,8 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
-import { HEADER_TITLE, JOB_TITLE } from "@/lib/constants";
+import { HEADER_TITLE, JOB_TITLE, SITE_TITLE } from "@/lib/constants";
+import { heroContent } from "@/lib/data/hero";
 
 // Satori cannot read CSS variables — values mirror :root / [data-theme="indigo"] in app/globals.css
 const COLORS = {
@@ -10,7 +11,7 @@ const COLORS = {
   accent: "#4f46e5",
 } as const;
 
-export const alt = `${HEADER_TITLE} — ${JOB_TITLE}`;
+export const alt = SITE_TITLE;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -60,7 +61,18 @@ export default async function Image() {
         </div>
         <div
           style={{
-            marginTop: 48,
+            marginTop: 24,
+            maxWidth: 760,
+            fontSize: 44,
+            fontWeight: 600,
+            lineHeight: 1.25,
+          }}
+        >
+          {heroContent.headline}
+        </div>
+        <div
+          style={{
+            marginTop: 40,
             width: 160,
             height: 12,
             borderRadius: 6,
