@@ -302,6 +302,76 @@ export default function DatenschutzerklaerungPage() {
         </p>
       </section>
 
+      <section className="mb-8 space-y-4">
+        <h2 className="text-xl font-semibold">4. Datenerfassung auf dieser Website</h2>
+
+        <h3 className="text-lg font-semibold">Kontaktformular</h3>
+        <p>
+          Wenn Sie uns über das Kontaktformular eine Anfrage senden, werden Ihre Angaben (Name,
+          E-Mail-Adresse und Nachricht) per E-Mail an uns übermittelt. Für den Versand nutzen wir den
+          E-Mail-Dienst Resend. Anbieter ist die:
+        </p>
+        <address className="not-italic">
+          Plus Five Five, Inc.<br />
+          2261 Market Street #5039<br />
+          San Francisco, CA 94114<br />
+          USA
+        </address>
+        <p>
+          Resend verarbeitet die Daten nur, um die E-Mail zuzustellen. In einer Datenbank auf dieser
+          Website werden Ihre Angaben nicht gespeichert.
+        </p>
+        <p>
+          Wir verwenden Ihre Angaben, um Ihre Anfrage zu beantworten und einen möglichen Auftrag
+          anzubahnen (Art. 6 Abs. 1 lit. b DSGVO). Die E-Mail bleibt in unserem Postfach, bis Ihre
+          Anfrage erledigt ist oder Sie die Löschung verlangen. Gesetzliche Aufbewahrungsfristen
+          bleiben unberührt. Weitere Informationen finden Sie in der{" "}
+          <a
+            href="https://resend.com/legal/privacy-policy"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline hover:no-underline"
+          >
+            Datenschutzerklärung von Resend
+          </a>
+          .
+        </p>
+
+        <h3 className="text-lg font-semibold">Terminbuchung über Calendly</h3>
+        <p>
+          Über die Schaltflächen „Book a Call“ auf dieser Website können Sie einen Termin für ein
+          Erstgespräch buchen. Dafür verlinken wir auf den Terminbuchungsdienst Calendly. Anbieter ist
+          die:
+        </p>
+        <address className="not-italic">
+          Calendly LLC<br />
+          115 E Main St, Ste A1B<br />
+          Buford, GA 30518<br />
+          USA
+        </address>
+        <p>
+          Calendly ist nicht in diese Website eingebunden. Beim Besuch dieser Website werden keine
+          Daten an Calendly übertragen und keine Cookies von Calendly gesetzt. Erst wenn Sie auf den
+          Link klicken, öffnet sich die Website von Calendly in einem neuen Tab. Ab diesem Zeitpunkt
+          verarbeitet Calendly Ihre Daten (z. B. IP-Adresse, Name, E-Mail-Adresse und den gewählten
+          Termin), auch in den USA.
+        </p>
+        <p>
+          Die Daten, die Sie bei der Buchung angeben, erhalten wir von Calendly. Wir verwenden sie nur,
+          um das Gespräch durchzuführen und einen möglichen Auftrag anzubahnen (Art. 6 Abs. 1 lit. b
+          DSGVO). Weitere Informationen finden Sie in der{" "}
+          <a
+            href="https://calendly.com/legal/privacy-notice"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline hover:no-underline"
+          >
+            Datenschutzerklärung von Calendly
+          </a>
+          .
+        </p>
+      </section>
+
       <p className="text-sm text-muted-foreground">
         Quelle:{" "}
         <a
