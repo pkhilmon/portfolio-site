@@ -3,6 +3,19 @@ import { HeroSection } from "./HeroSection"
 import { heroContent } from "@/lib/data/hero"
 import { SECTION_IDS } from "@/lib/constants"
 
+const TEST_CALENDLY_URL = 'https://calendly.com/test/20min'
+
+// CALENDLY_URL is read from env at import time; the getter lets a test switch it
+let mockCalendlyUrl = TEST_CALENDLY_URL
+jest.mock('@/lib/constants', () => ({
+    ...jest.requireActual('@/lib/constants'),
+    get CALENDLY_URL() { return mockCalendlyUrl },
+}))
+
+afterEach(() => {
+    mockCalendlyUrl = TEST_CALENDLY_URL
+})
+
 describe('HeroSection', () => {
     it ('renders an h1 with the headline', () => {
         render(<HeroSection content={heroContent} />)
@@ -29,5 +42,37 @@ describe('HeroSection', () => {
         render(<HeroSection content={heroContent} />)
         const section = document.getElementById(SECTION_IDS.hero)
         expect(section).not.toBeNull()
+    })
+
+    it ('Book a Call links to Calendly in a new tab with the default variant', () => {
+        render(<HeroSection content={heroContent} />)
+        const link = screen.getByRole('link', { name: heroContent.bookACallLabel })
+        expect(link).toHaveAttribute('href', TEST_CALENDLY_URL)
+        expect(link).toHaveAttribute('target', '_blank')
+        expect(link).toHaveAttribute('rel', 'noopener noreferrer')
+        expect(link).toHaveClass('bg-accent')
+    })
+
+    it ('quote CTA uses the outline variant', () => {
+        render(<HeroSection content={heroContent} />)
+        expect(screen.getByRole('link', { name: heroContent.primaryCtaLabel })).toHaveClass('border-accent')
+    })
+
+    it ('renders Book a Call before the quote CTA', () => {
+        render(<HeroSection content={heroContent} />)
+        const links = screen.getAllByRole('link')
+        expect(links.map((l) => l.textContent)).toEqual([heroContent.bookACallLabel, heroContent.primaryCtaLabel])
+    })
+
+    it ('renders no Book a Call link when CALENDLY_URL is empty', () => {
+        mockCalendlyUrl = ''
+        render(<HeroSection content={heroContent} />)
+        expect(screen.queryByRole('link', { name: heroContent.bookACallLabel })).not.toBeInTheDocument()
+        expect(screen.getByRole('link', { name: heroContent.primaryCtaLabel })).toBeInTheDocument()
+    })
+
+    it ('contains no prices, placeholders or out-of-scope claims', () => {
+        const { container } = render(<HeroSection content={heroContent} />)
+        expect(container.textContent).not.toMatch(/€|\[ \]|auth|rls|row level security|sdk|stripe|tenantry/i)
     })
 })
