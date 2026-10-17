@@ -318,8 +318,13 @@ export default function DatenschutzerklaerungPage() {
           USA
         </address>
         <p>
-          Resend verarbeitet die Daten nur, um die E-Mail zuzustellen. In einer Datenbank auf dieser
-          Website werden Ihre Angaben nicht gespeichert.
+          Resend verarbeitet die Daten nur, um die E-Mail zuzustellen. Der Versand erfolgt über
+          Server in der EU (Irland). Da Resend seinen Sitz in den USA hat, ist ein Zugriff aus den USA
+          nicht ausgeschlossen. Die Datenübertragung in die USA wird auf die Standardvertragsklauseln
+          der EU-Kommission und das EU-US Data Privacy Framework gestützt. Mit Resend besteht ein
+          Vertrag über Auftragsverarbeitung (Art. 28 DSGVO). Resend speichert Protokolle der
+          versendeten E-Mails bis zu 30 Tage. In einer Datenbank auf dieser Website werden Ihre
+          Angaben nicht gespeichert.
         </p>
         <p>
           Wir verwenden Ihre Angaben, um Ihre Anfrage zu beantworten und einen möglichen Auftrag
@@ -359,7 +364,10 @@ export default function DatenschutzerklaerungPage() {
         <p>
           Die Daten, die Sie bei der Buchung angeben, erhalten wir von Calendly. Wir verwenden sie nur,
           um das Gespräch durchzuführen und einen möglichen Auftrag anzubahnen (Art. 6 Abs. 1 lit. b
-          DSGVO). Weitere Informationen finden Sie in der{" "}
+          DSGVO). Calendly verarbeitet die Buchungsdaten in unserem Auftrag; mit Calendly besteht ein
+          Vertrag über Auftragsverarbeitung (Art. 28 DSGVO). Die Datenübertragung in die USA wird auf
+          das EU-US Data Privacy Framework gestützt, hilfsweise auf die Standardvertragsklauseln der
+          EU-Kommission. Weitere Informationen finden Sie in der{" "}
           <a
             href="https://calendly.com/legal/privacy-notice"
             target="_blank"
