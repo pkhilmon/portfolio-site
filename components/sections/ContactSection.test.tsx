@@ -31,7 +31,7 @@ describe('ContactSection', () => {
         renderSection()
         expect(screen.getByRole('heading', { level: 2, name: 'Have a project in mind?' })).toBeInTheDocument()
         expect(screen.getByText('Book a 20-minute call or email a short description. No obligation.')).toBeInTheDocument()
-        expect(screen.getByText('20–30 h/week · Response within 48 h')).toBeInTheDocument()
+        expect(screen.getByText('20–30 h/week · Response within 24 h')).toBeInTheDocument()
     })
 
     it('renders Book a Call linking to Calendly in a new tab', () => {

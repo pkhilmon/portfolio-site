@@ -30,7 +30,7 @@ export const faqContent: FaqContent = {
         },
         {
             question: "How do we communicate?",
-            answer: "By email in English (German works too), with a short written update and a staging link every week. A call when something needs a decision. Every message gets an answer within 48 hours.",
+            answer: "By email in English (German works too), with a short written update and a staging link every week. A call when something needs a decision. Every message gets an answer within 24 hours.",
         },
         {
             question: "What stack do you use?",

@@ -12,7 +12,7 @@ export interface ContactContent {
 export const contactContent: ContactContent = {
     heading: "Have a project in mind?",
     body: "Book a 20-minute call or email a short description. No obligation.",
-    availability: "20–30 h/week · Response within 48 h",
+    availability: "20–30 h/week · Response within 24 h",
     // Same label as the hero button, so both Book a Call CTAs always read the same
     bookACallLabel: heroContent.bookACallLabel,
     emailLabel: "Email me",
