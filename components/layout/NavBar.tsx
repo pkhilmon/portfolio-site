@@ -187,7 +187,7 @@ export function NavBar() {
                         })}
                     </ul>
 
-                    {/* Desktop CV download link */}
+                    {/* Desktop QR code button */}
                     <QRCodeButton className={cn("hidden md:flex h-9 w-9")} />
 
                     {/* Hamburger mobile only */}
