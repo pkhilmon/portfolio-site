@@ -39,7 +39,7 @@ describe('FaqSection', () => {
         const { container } = renderSection()
         faqContent.items.forEach(item => {
             // toHaveTextContent normalises the non-breaking space to a plain space
-            expect(container).toHaveTextContent(item.answer.replace(/ /g, ' '))
+            expect(container).toHaveTextContent(item.answer.replace(/\u00a0/g, ' '))
         })
     })
 

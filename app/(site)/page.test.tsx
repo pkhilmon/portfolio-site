@@ -6,13 +6,15 @@ import { AboutSection } from '@/components/sections/AboutSection'
 import { ProjectsSection } from '@/components/sections/ProjectsSection'
 import { ProcessSection } from '@/components/sections/ProcessSection'
 import { WhyMeSection } from '@/components/sections/WhyMeSection'
+import { FaqSection } from '@/components/sections/FaqSection'
 import { ContactSection } from '@/components/sections/ContactSection'
 import { heroContent } from '@/lib/data/hero'
 import { servicesContent } from '@/lib/data/services'
 import { aboutContent } from '@/lib/data/about'
 import { projects, projectsDisclaimer, projectsHeading } from '@/lib/data/projects'
 import { processContent, whyMeContent } from '@/lib/data/process'
-import { contactHeading, PRIVACY_NOTICE } from '@/lib/data/contact'
+import { faqContent } from '@/lib/data/faq'
+import { contactContent } from '@/lib/data/contact'
 
 jest.mock('@/components/sections/HeroSection', () => ({ HeroSection: jest.fn(() => null) }))
 jest.mock('@/components/sections/ServicesSection', () => ({ ServicesSection: jest.fn(() => null) }))
@@ -20,6 +22,7 @@ jest.mock('@/components/sections/AboutSection', () => ({ AboutSection: jest.fn((
 jest.mock('@/components/sections/ProjectsSection', () => ({ ProjectsSection: jest.fn(() => null) }))
 jest.mock('@/components/sections/ProcessSection', () => ({ ProcessSection: jest.fn(() => null) }))
 jest.mock('@/components/sections/WhyMeSection', () => ({ WhyMeSection: jest.fn(() => null) }))
+jest.mock('@/components/sections/FaqSection', () => ({ FaqSection: jest.fn(() => null) }))
 jest.mock('@/components/sections/ContactSection', () => ({ ContactSection: jest.fn(() => null) }))
 
 // First argument of the first render call = the props the section received
@@ -39,11 +42,12 @@ describe('Home', () => {
     expect(propsOf(ProjectsSection)).toEqual({ projects, heading: projectsHeading, disclaimer: projectsDisclaimer })
     expect(propsOf(ProcessSection)).toEqual({ content: processContent })
     expect(propsOf(WhyMeSection)).toEqual({ content: whyMeContent })
-    expect(propsOf(ContactSection)).toEqual({ heading: contactHeading, privacyNotice: PRIVACY_NOTICE })
+    expect(propsOf(FaqSection)).toEqual({ content: faqContent })
+    expect(propsOf(ContactSection)).toEqual({ content: contactContent })
   })
 
   // Sections are mocked, so render order is read from the mocks instead of the DOM
-  it('renders Hero, Services, Work, How it works, Why me, About in that order', () => {
+  it('renders Hero, Services, Work, How it works, Why me, About, FAQ, Contact in that order', () => {
     render(<Home />)
     const order = (component: unknown) => (component as jest.Mock).mock.invocationCallOrder[0]
     expect(order(HeroSection)).toBeLessThan(order(ServicesSection))
@@ -51,5 +55,7 @@ describe('Home', () => {
     expect(order(ProjectsSection)).toBeLessThan(order(ProcessSection))
     expect(order(ProcessSection)).toBeLessThan(order(WhyMeSection))
     expect(order(WhyMeSection)).toBeLessThan(order(AboutSection))
+    expect(order(AboutSection)).toBeLessThan(order(FaqSection))
+    expect(order(FaqSection)).toBeLessThan(order(ContactSection))
   })
 })

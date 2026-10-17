@@ -14,7 +14,9 @@ import { servicesContent } from "@/lib/data/services";
 import { aboutContent } from "@/lib/data/about";
 import { projects, projectsDisclaimer, projectsHeading } from "@/lib/data/projects";
 import { processContent, whyMeContent } from "@/lib/data/process";
-import { contactHeading, PRIVACY_NOTICE } from "@/lib/data/contact";
+import { contactContent } from "@/lib/data/contact";
+import { FaqSection } from "@/components/sections/FaqSection";
+import { faqContent } from "@/lib/data/faq";
 
 export default function Home() {
   return (
@@ -35,7 +37,9 @@ export default function Home() {
       <Separator />
       {/*<TestimonialsSection />
       <Separator/> */}
-      <ContactSection heading={contactHeading} privacyNotice={PRIVACY_NOTICE} />
+      <FaqSection content={faqContent} />
+      <Separator />
+      <ContactSection content={contactContent} />
     </main>
   );
 }
