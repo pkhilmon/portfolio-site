@@ -10,7 +10,7 @@ export function FaqSection({ content }: { content: FaqContent }) {
             <h2 className={cn("px-6 md:px-0 mb-6 text-3xl font-semibold")}>
                 {content.heading}
             </h2>
-            <ul className={cn("px-6 md:px-0 flex flex-col gap-3")}>
+            <ul className={cn("flex flex-col gap-3")}>
                 {content.items.map(item => (
                     <li key={item.question}>
                         {/* Native disclosure: works without JS, answer is in the static HTML,
