@@ -1,50 +1,70 @@
 import { render, screen } from "@testing-library/react"
 import { ContactSection } from "./ContactSection"
 import { SECTION_IDS } from "@/lib/constants"
-import { contactHeading, PRIVACY_NOTICE } from "@/lib/data/contact"
+import { contactContent } from "@/lib/data/contact"
+
+const TEST_CALENDLY_URL = 'https://calendly.com/test/20min'
+
+// CALENDLY_URL is read from env at import time and isn't set in jest.setup.ts.
+// jest.mock is hoisted above the const, so the URL is repeated inside the factory.
+jest.mock('@/lib/constants', () => ({
+    ...jest.requireActual('@/lib/constants'),
+    CALENDLY_URL: 'https://calendly.com/test/20min',
+}))
 
 jest.mock('./ContactForm', () => ({
     ContactForm: () => <div data-testid="contact-form-mock">ContactForm</div>,
 }))
 
 function renderSection() {
-    return render(<ContactSection heading={contactHeading} privacyNotice={PRIVACY_NOTICE} />)
+    return render(<ContactSection content={contactContent} />)
 }
 
 describe('ContactSection', () => {
     it('renders section with correct id', () => {
         renderSection()
-        const section = document.getElementById(SECTION_IDS.contact)
-        expect(section).toBeInTheDocument()
+        expect(document.getElementById(SECTION_IDS.contact)).toBeInTheDocument()
     })
 
-    it('renders an h2 heading', () => {
+    // Expected copy is hard-coded so an accidental change to the approved text fails the test
+    it('renders the final-CTA headline, body and availability line', () => {
         renderSection()
-        expect(screen.getByRole('heading', { level: 2, name: contactHeading })).toBeInTheDocument()
+        expect(screen.getByRole('heading', { level: 2, name: 'Have a project in mind?' })).toBeInTheDocument()
+        expect(screen.getByText('Book a 20-minute call or email a short description. No obligation.')).toBeInTheDocument()
+        expect(screen.getByText('20–30 h/week · Response within 48 h')).toBeInTheDocument()
     })
 
-    it('renders the ContactForm component', () => {
+    it('renders Book a Call linking to Calendly in a new tab', () => {
+        renderSection()
+        const link = screen.getByRole('link', { name: 'Book a Call' })
+        expect(link).toHaveAttribute('href', TEST_CALENDLY_URL)
+        expect(link).toHaveAttribute('target', '_blank')
+        expect(link).toHaveAttribute('rel', 'noopener noreferrer')
+    })
+
+    it('renders the Email button with a mailto href', () => {
+        renderSection()
+        expect(screen.getByRole('link', { name: 'Email me' })).toHaveAttribute('href', 'mailto:test@example.com')
+    })
+
+    it('renders the ContactForm and the privacy notice', () => {
         renderSection()
         expect(screen.getByTestId('contact-form-mock')).toBeInTheDocument()
-    })
-
-    it('renders email link with mailto href', () => {
-        renderSection()
-        const emailLink = screen.getByRole('link', { name: /email me directly/i })
-        expect(emailLink).toHaveAttribute('href', expect.stringContaining('mailto:'))
-    })
-
-    it('renders CV download links for both languages', () => {
-        renderSection()
-        const links = screen.getAllByRole('link')
-        const hrefs = links.map(l => l.getAttribute('href'))
-        expect(hrefs.some(h => h?.includes('en.pdf'))).toBe(true)
-        expect(hrefs.some(h => h?.includes('de.pdf'))).toBe(true)
-    })
-
-    it('renders privacy notice text', () => {
-        renderSection()
         expect(screen.getByText(/secure email API/i)).toBeInTheDocument()
-        expect(screen.getByText(/not stored/i)).toBeInTheDocument()
+    })
+
+    it('has no CV download or PDF link', () => {
+        const { container } = renderSection()
+        const hrefs = screen.getAllByRole('link').map(l => l.getAttribute('href') ?? '')
+        expect(hrefs.some(h => h.endsWith('.pdf'))).toBe(false)
+        expect(container.textContent).not.toMatch(/\bCV\b/)
+    })
+
+    it('shows no prices, placeholders, Tenantry or Auth/RLS/SDK/Stripe wording', () => {
+        const { container } = renderSection()
+        const text = container.textContent ?? ''
+        expect(text).not.toContain('€')
+        expect(text).not.toContain('[ ]')
+        expect(text).not.toMatch(/auth|rls|row level security|sdk|stripe|tenantry/i)
     })
 })
