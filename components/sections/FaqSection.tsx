@@ -18,7 +18,7 @@ export function FaqSection({ content }: { content: FaqContent }) {
                         <details className={cn("group rounded-lg bg-card text-card-foreground ring-1 ring-foreground/10")}>
                             <summary className={cn(
                                 "flex min-h-11 cursor-pointer list-none items-center justify-between gap-4 rounded-lg px-4 py-3 font-medium",
-                                "outline-none focus-visible:ring-2 focus-visible:ring-ring/30",
+                                "outline-none focus-visible:ring-2 focus-visible:ring-accent",
                                 "[&::-webkit-details-marker]:hidden"
                             )}>
                                 {item.question}

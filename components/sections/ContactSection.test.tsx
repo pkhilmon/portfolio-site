@@ -6,15 +6,21 @@ import { contactContent } from "@/lib/data/contact"
 const TEST_CALENDLY_URL = 'https://calendly.com/test/20min'
 
 // CALENDLY_URL is read from env at import time and isn't set in jest.setup.ts.
-// jest.mock is hoisted above the const, so the URL is repeated inside the factory.
+// The getter reads mockCalendlyUrl at render time, so a test can switch it;
+// the "mock" prefix lets the hoisted jest.mock factory reference the variable.
+let mockCalendlyUrl = TEST_CALENDLY_URL
 jest.mock('@/lib/constants', () => ({
     ...jest.requireActual('@/lib/constants'),
-    CALENDLY_URL: 'https://calendly.com/test/20min',
+    get CALENDLY_URL() { return mockCalendlyUrl },
 }))
 
 jest.mock('./ContactForm', () => ({
     ContactForm: () => <div data-testid="contact-form-mock">ContactForm</div>,
 }))
+
+afterEach(() => {
+    mockCalendlyUrl = TEST_CALENDLY_URL
+})
 
 function renderSection() {
     return render(<ContactSection content={contactContent} />)
@@ -66,5 +72,12 @@ describe('ContactSection', () => {
         expect(text).not.toContain('€')
         expect(text).not.toContain('[ ]')
         expect(text).not.toMatch(/auth|rls|row level security|sdk|stripe|tenantry/i)
+    })
+
+    it('hides Book a Call but keeps Email when CALENDLY_URL is empty', () => {
+        mockCalendlyUrl = ''
+        renderSection()
+        expect(screen.queryByRole('link', { name: 'Book a Call' })).not.toBeInTheDocument()
+        expect(screen.getByRole('link', { name: 'Email me' })).toBeInTheDocument()
     })
 })

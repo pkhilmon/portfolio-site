@@ -16,7 +16,7 @@ export function ContactSection({ content }: { content: ContactContent }) {
                     <p className={cn("text-sm font-medium")}>{content.availability}</p>
                 </div>
 
-                {/* Each CTA renders only when its env var is set, same guard as before */}
+                {/* Each CTA renders only when its env var is set, so a missing var never ships a dead link */}
                 {(CALENDLY_URL || EMAIL) && (
                     <div className={cn("flex flex-col gap-3 sm:flex-row")}>
                         {CALENDLY_URL && (

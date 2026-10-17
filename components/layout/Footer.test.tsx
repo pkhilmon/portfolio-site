@@ -10,6 +10,13 @@ describe('Footer', () => {
     })
   })
 
+  // Hard-coded so dropping a profile from SOCIAL_LINKS fails the test
+  it('shows LinkedIn, GitHub and Upwork (FR17)', () => {
+    render(<Footer />)
+    expect(SOCIAL_LINKS.map(({ label }) => label)).toEqual(['LinkedIn', 'GitHub', 'Upwork'])
+    expect(screen.getByRole('link', { name: /github/i })).toHaveAttribute('href', 'https://github.com/pkhilmon')
+  })
+
   it('social links open in new tab with noopener', () => {
     render(<Footer />)
     SOCIAL_LINKS.forEach(({ label }) => {
