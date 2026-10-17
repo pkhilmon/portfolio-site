@@ -54,9 +54,12 @@ describe('ContactSection', () => {
     })
 
     it('renders the ContactForm and the privacy notice', () => {
-        renderSection()
+        const { container } = renderSection()
         expect(screen.getByTestId('contact-form-mock')).toBeInTheDocument()
-        expect(screen.getByText(/secure email API/i)).toBeInTheDocument()
+        expect(screen.getByText(
+            'Contact form messages are delivered to my inbox via a secure email API and are not stored in any database on this site.'
+        )).toBeInTheDocument()
+        expect(container.textContent).not.toMatch(/retained/i)
     })
 
     it('has no CV download or PDF link', () => {

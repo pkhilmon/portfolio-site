@@ -16,5 +16,5 @@ export const contactContent: ContactContent = {
     // Same label as the hero button, so both Book a Call CTAs always read the same
     bookACallLabel: heroContent.bookACallLabel,
     emailLabel: "Email me",
-    privacyNotice: "Contact form submissions are delivered via a secure email API and are not stored in any database. No personal data is retained after delivery.",
+    privacyNotice: "Contact form messages are delivered to my inbox via a secure email API and are not stored in any database on this site.",
 }
