@@ -14,10 +14,7 @@ export function NavBar() {
     const [active, setActive] = useState<{ id: string; pathname: string | null }>({ id: "", pathname: null })
     const [scrolled, setScrolled] = useState<boolean>(false)
     const [drawerOpen, setDrawerOpen] = useState<boolean>(false)
-    const [heroInView, setHeroInView] = useState<boolean>(true)
     const pathname = usePathname()
-    // Only the home page has a hero; every other page shows the name from the start
-    const hideTitle = pathname === "/" && heroInView
     // Sections only exist on the home page, so other pages link back to them
     const sectionHref = (id: string) => (pathname === "/" ? `#${id}` : `/#${id}`)
     // A highlight only counts on the page where it was set, so it doesn't carry over after navigation
@@ -54,18 +51,6 @@ export function NavBar() {
 
         return () => observer.disconnect()
     }, [pathname]) // re-observe the sections after client navigation back to /
-
-    // hide/show nav name based on hero section visibility
-    useEffect(() => {
-        const hero = document.getElementById("hero")
-        if (!hero) return
-        const observer = new IntersectionObserver(
-            ([entry]) => setHeroInView(entry.isIntersecting),
-            { rootMargin: "-250px 0px 0px 0px", threshold: 0 }
-        )
-        observer.observe(hero)
-        return () => observer.disconnect()
-    }, [pathname]) // NavBar lives in the layout, so re-observe the new hero after client navigation back to /
 
     // scroll threshold for frosted glass
     useEffect(() => {
@@ -159,9 +144,7 @@ export function NavBar() {
                     aria-label="Primary navigation"
                 >
                     <Link href="/" className={cn(
-                        "uppercase text-sm font-semibold text-gray-700 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent",
-                        "transition-all duration-300",
-                        hideTitle ? "opacity-0 pointer-events-none" : "opacity-100"
+                        "uppercase text-sm font-semibold text-gray-700 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                     )}>
                         {HEADER_TITLE}
                     </Link>

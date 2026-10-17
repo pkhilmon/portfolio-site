@@ -1,6 +1,6 @@
 import { render, screen, fireEvent, act, within } from '@testing-library/react'
 import { NavBar } from './NavBar'
-import { NAV_LABELS, NAV_LINKS, SECTION_IDS } from '@/lib/constants'
+import { NAV_LABELS, NAV_LINKS, SECTION_IDS, HEADER_TITLE } from '@/lib/constants'
 import userEvent from '@testing-library/user-event'
 
 // Mock IntersectionObserver — not available in jsdom
@@ -39,6 +39,25 @@ describe('NavBar', () => {
     // aria-hidden drawer keeps mobile links out of the accessibility tree
     const currentLinks = screen.queryAllByRole('link', { current: 'page' })
     expect(currentLinks.length).toBe(1)
+  })
+
+  it('shows the name on the home page, also after scrolling past the hero', () => {
+    const hero = document.createElement('section')
+    hero.id = SECTION_IDS.hero
+    document.body.appendChild(hero)
+    render(<NavBar />)
+
+    const name = screen.getByRole('link', { name: HEADER_TITLE })
+    expect(name).not.toHaveClass('opacity-0')
+
+    const observerMock = global.IntersectionObserver as jest.Mock
+    act(() => {
+      observerMock.mock.calls.forEach(([cb]) =>
+        cb([{ isIntersecting: false, target: hero }] as unknown as IntersectionObserverEntry[], {} as IntersectionObserver))
+    })
+    expect(name).not.toHaveClass('opacity-0')
+    expect(name).not.toHaveClass('pointer-events-none')
+    hero.remove()
   })
 
   it('renders a nav landmark', () => {
