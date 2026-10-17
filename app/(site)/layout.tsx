@@ -5,31 +5,28 @@ import { cn } from "@/lib/utils";
 import { NavBar } from "@/components/layout/NavBar";
 import { Footer } from "@/components/layout/Footer";
 import { SITE_URL } from "@/lib/env";
-import { ACTIVE_THEME } from "@/lib/constants";
+import { ACTIVE_THEME, HEADER_TITLE, SITE_DESCRIPTION, SITE_TITLE } from "@/lib/constants";
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
-const DESCRIPTION = 'Frontend developer specialising in React and Next.js. Background in game dev, embedded systems, and enterprise Java. Available for freelance and full-time roles.';
-const OG_DESCRIPTION = 'Frontend developer specialising in React and Next.js. Background in game dev, embedded systems, and enterprise Java. Available for freelance and full-time roles.';
-
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: 'Pavlo Khilmon — Frontend Developer',
-  description: DESCRIPTION,
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
   alternates: {
     canonical: '/',
   },
   openGraph: {
     type: 'website',
-    siteName: 'Pavlo Khilmon',
+    siteName: HEADER_TITLE,
     url: SITE_URL,
-    title: 'Pavlo Khilmon — Frontend Developer',
-    description: OG_DESCRIPTION,
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Pavlo Khilmon — Frontend Developer',
-    description: OG_DESCRIPTION,
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
   },
 };
 

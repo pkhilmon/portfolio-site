@@ -26,7 +26,9 @@ export const NAV_LABELS = {
 } as const satisfies Record<keyof typeof SECTION_IDS, string>;
 
 export const HEADER_TITLE = "Pavlo Khilmon" as const;
-export const JOB_TITLE = "Frontend Developer" as const;
+export const JOB_TITLE = "Full-stack Next.js Developer" as const;
+export const SITE_TITLE = `${HEADER_TITLE} – ${JOB_TITLE}` as const;
+export const SITE_DESCRIPTION = "Full-stack Next.js developer based in Germany, working remotely. Web apps and MVPs for founders and agencies at a fixed price from a written scope." as const;
 // "teal" uses :root defaults; "indigo" applies [data-theme="indigo"] overrides
 export const ACTIVE_THEME = "indigo" as const satisfies "teal" | "indigo";
 export const EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "";
