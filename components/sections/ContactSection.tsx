@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import { CALENDLY_URL, EMAIL, SECTION_IDS } from "@/lib/constants";
 import { ContactForm } from "@/components/sections/ContactForm";
 import { buttonVariants } from "@/components/ui/button-variants";
-import { ContactContent } from "@/lib/data/contact";
+import type { ContactContent } from "@/lib/data/contact";
 
 export function ContactSection({ content }: { content: ContactContent }) {
     return (

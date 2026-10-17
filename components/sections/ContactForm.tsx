@@ -79,7 +79,7 @@ export function ContactForm({ className }: ContactFormProps) {
             {/* Honeypot - hidden from visitors, checked by /api/contact for spam */}
             <input type="text" name="_gotcha" tabIndex={-1} aria-hidden="true" className={cn('hidden')} />
 
-            <Button type="submit" disabled={status === 'loading'} className={cn("w-full")}>
+            <Button type="submit" variant="outline" size="2xl" disabled={status === 'loading'} className={cn("w-full")}>
                 {status === 'loading' ? (
                     <>
                         <span

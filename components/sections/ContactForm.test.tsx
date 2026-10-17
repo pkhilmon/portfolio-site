@@ -36,7 +36,7 @@ describe('ContactForm', () => {
         await userEvent.type(screen.getByLabelText('Message'), 'Hello!')
         await userEvent.click(screen.getByRole('button', { name: 'Send'}))
         await waitFor(() => {
-            expect(screen.getByText(/Message sent/)).toBeInTheDocument()
+            expect(screen.getByText(/reply within 24 hours/)).toBeInTheDocument()
         })
     })
 
