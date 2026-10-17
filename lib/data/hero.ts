@@ -7,9 +7,9 @@ export interface HeroContent {
 }
 
 export const heroContent: HeroContent = {
-    eyebrow: "Available for projects",
-    headline: "Pavlo Khilmon",
-    tagline: "Fast, high-quality web interfaces — from landing pages to full-stack products.",
-    primaryCtaLabel: "Get in touch",
+    eyebrow: "Full-stack Next.js Developer",
+    headline: "Web apps and MVPs for founders and agencies",
+    tagline: "You get a fixed price before work starts and the full code when it ends.",
+    primaryCtaLabel: "Get a fixed quote in 48 hours",
     bookACallLabel: "Book a Call",
 };

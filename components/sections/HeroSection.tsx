@@ -13,22 +13,24 @@ export function HeroSection({ content }: { content: HeroContent }) {
                 <p className={cn("mb-3 text-xs sm:text-sm font-medium text-accent uppercase tracking-widest")}>
                     {content.eyebrow}
                 </p>
-                <h1 className={cn("mb-5 text-4xl sm:text-5xl md:text-6xl font-bold leading-tight tracking-tight")}>
+                <h1 className={cn("mb-5 text-3xl sm:text-4xl md:text-5xl font-bold leading-tight tracking-tight")}>
                     {content.headline}
                 </h1>
             </hgroup>
             <p className={cn("mb-10 max-w-xl mx-auto text-base sm:text-lg text-muted-foreground leading-relaxed")}>
                 {content.tagline}
             </p>
-            <div className={cn("flex flex-row justify-center gap-3")}>
-                <a
-                    href={CALENDLY_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={cn(buttonVariants({ variant: "default", size: "xl" }), heroButtonSm)}
-                >
-                    {content.bookACallLabel}
-                </a>
+            <div className={cn("flex flex-col sm:flex-row justify-center gap-3")}>
+                {CALENDLY_URL && (
+                    <a
+                        href={CALENDLY_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={cn(buttonVariants({ variant: "default", size: "xl" }), heroButtonSm)}
+                    >
+                        {content.bookACallLabel}
+                    </a>
+                )}
                 <a
                     href={`#${SECTION_IDS.contact}`}
                     className={cn(buttonVariants({ variant: "outline", size: "xl" }), heroButtonSm)}
