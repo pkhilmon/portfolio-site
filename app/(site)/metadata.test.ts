@@ -1,7 +1,8 @@
 import { metadata as impressum } from '@/app/(site)/impressum/page'
 import { metadata as datenschutz } from '@/app/(site)/datenschutzerklaerung/page'
 import { metadata as dlrg } from '@/app/(site)/work/dlrg-24h-schwimmen/page'
-import { HEADER_TITLE } from '@/lib/constants'
+import { metadata as root } from '@/app/(site)/layout'
+import { HEADER_TITLE, SITE_DESCRIPTION, SITE_TITLE } from '@/lib/constants'
 jest.mock('next/og', () => ({ ImageResponse: jest.fn() }))
 
 import * as rootOgImage from '@/app/(site)/opengraph-image'
@@ -40,5 +41,30 @@ describe('legal page opengraph-image re-exports', () => {
   ])('%s re-exports the root OG image', (_, mod) => {
     expect(mod.default).toBe(rootOgImage.default)
     expect(mod.size).toBe(rootOgImage.size)
+  })
+})
+
+describe('root metadata', () => {
+  it('uses the approved title and description', () => {
+    expect(root.title).toBe('Pavlo Khilmon – Full-stack Next.js Developer')
+    expect(root.description).toBe(SITE_DESCRIPTION)
+  })
+
+  it('keeps the title within 60 characters, name first', () => {
+    expect(SITE_TITLE.length).toBeLessThanOrEqual(60)
+    expect(SITE_TITLE.startsWith(HEADER_TITLE)).toBe(true)
+  })
+
+  it('keeps the description within 155 characters', () => {
+    expect(SITE_DESCRIPTION.length).toBeLessThanOrEqual(155)
+  })
+
+  it('gives OG and Twitter the same title and description', () => {
+    expect(root.openGraph).toMatchObject({ title: SITE_TITLE, description: SITE_DESCRIPTION, siteName: HEADER_TITLE })
+    expect(root.twitter).toMatchObject({ title: SITE_TITLE, description: SITE_DESCRIPTION })
+  })
+
+  it('contains no prices, placeholders or out-of-scope claims', () => {
+    expect(`${SITE_TITLE} ${SITE_DESCRIPTION}`).not.toMatch(/€|\[ \]|auth|rls|row level security|sdk|stripe|tenantry/i)
   })
 })
