@@ -37,6 +37,7 @@ describe('PersonJsonLd', () => {
     expect(service.url).toBe(SITE_URL)
     expect(service.description).toBe(SITE_DESCRIPTION)
     expect(service.provider).toEqual({ '@id': `${SITE_URL}#person` })
+    expect(service.hasOfferCatalog).toMatchObject({ '@type': 'OfferCatalog', name: servicesContent.heading })
     expect(service.hasOfferCatalog.itemListElement).toEqual(
       servicesContent.items.map(({ title, audience }) => ({
         '@type': 'Offer',

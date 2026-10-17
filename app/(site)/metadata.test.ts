@@ -41,13 +41,18 @@ describe('legal page opengraph-image re-exports', () => {
   ])('%s re-exports the root OG image', (_, mod) => {
     expect(mod.default).toBe(rootOgImage.default)
     expect(mod.size).toBe(rootOgImage.size)
+    expect(mod.alt).toBe(rootOgImage.alt)
   })
 })
 
 describe('root metadata', () => {
   it('uses the approved title and description', () => {
     expect(root.title).toBe('Pavlo Khilmon – Full-stack Next.js Developer')
-    expect(root.description).toBe(SITE_DESCRIPTION)
+    expect(root.description).toBe('Full-stack Next.js developer based in Germany, working remotely. Web apps and MVPs for founders and agencies at a fixed price from a written scope.')
+  })
+
+  it('uses the site title as the OG image alt text', () => {
+    expect(rootOgImage.alt).toBe(SITE_TITLE)
   })
 
   it('keeps the title within 60 characters, name first', () => {

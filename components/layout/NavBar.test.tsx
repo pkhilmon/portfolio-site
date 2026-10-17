@@ -45,19 +45,22 @@ describe('NavBar', () => {
     const hero = document.createElement('section')
     hero.id = SECTION_IDS.hero
     document.body.appendChild(hero)
-    render(<NavBar />)
+    try {
+      render(<NavBar />)
 
-    const name = screen.getByRole('link', { name: HEADER_TITLE })
-    expect(name).not.toHaveClass('opacity-0')
+      const name = screen.getByRole('link', { name: HEADER_TITLE })
+      expect(name).not.toHaveClass('opacity-0')
 
-    const observerMock = global.IntersectionObserver as jest.Mock
-    act(() => {
-      observerMock.mock.calls.forEach(([cb]) =>
-        cb([{ isIntersecting: false, target: hero }] as unknown as IntersectionObserverEntry[], {} as IntersectionObserver))
-    })
-    expect(name).not.toHaveClass('opacity-0')
-    expect(name).not.toHaveClass('pointer-events-none')
-    hero.remove()
+      const observerMock = global.IntersectionObserver as jest.Mock
+      act(() => {
+        observerMock.mock.calls.forEach(([cb]) =>
+          cb([{ isIntersecting: false, target: hero }] as unknown as IntersectionObserverEntry[], {} as IntersectionObserver))
+      })
+      expect(name).not.toHaveClass('opacity-0')
+      expect(name).not.toHaveClass('pointer-events-none')
+    } finally {
+      hero.remove()
+    }
   })
 
   it('renders a nav landmark', () => {

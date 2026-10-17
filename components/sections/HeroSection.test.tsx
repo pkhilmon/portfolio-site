@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react"
 import { HeroSection } from "./HeroSection"
 import { heroContent } from "@/lib/data/hero"
-import { SECTION_IDS } from "@/lib/constants"
+import { SECTION_IDS, JOB_TITLE } from "@/lib/constants"
 
 const TEST_CALENDLY_URL = 'https://calendly.com/test/20min'
 
@@ -25,6 +25,15 @@ describe('HeroSection', () => {
     it ('renders the eyebrow label', () => {
         render(<HeroSection content={heroContent} />)
         expect(screen.getByText(heroContent.eyebrow)).toBeInTheDocument()
+    })
+
+    it ('eyebrow matches the job title used in metadata and JSON-LD', () => {
+        expect(heroContent.eyebrow).toBe(JOB_TITLE)
+    })
+
+    it ('both CTAs are at least 44px tall (h-12) at every width', () => {
+        render(<HeroSection content={heroContent} />)
+        screen.getAllByRole('link').forEach((link) => expect(link).toHaveClass('h-12'))
     })
 
     it ('renders the tagline', () => {
